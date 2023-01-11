@@ -1,6 +1,6 @@
 package com.almadavic.securitystandard.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.userdetails.UserDetails;
