@@ -19,8 +19,10 @@ public class AuthenticationServiceImpl implements AuthenticationService { // Ser
 
     private final TokenService tokenService; // injeção de dependencia do TokenService -> gerar o token.
 
+    private final AuthenticationManager authManager;    // Injeção de dependencia automatica - > AuthenticationManager
+
     @Override
-    public Token authenticate(LoginDTO loginData, AuthenticationManager authManager) { // Método para fazer o login e se autenticar no sistema.
+    public Token authenticate(LoginDTO loginData) { // Método para fazer o login e se autenticar no sistema.
 
         UsernamePasswordAuthenticationToken login = loginData.toConvert();   // converter os dados passado pelo usuario em um token de autenticação
 

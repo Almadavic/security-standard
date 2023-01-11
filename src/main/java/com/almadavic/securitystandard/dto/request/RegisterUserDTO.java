@@ -20,7 +20,6 @@ public class RegisterUserDTO { // DTO que representa o cadastro do usuário no s
     @Email // --> Validação se está em formato de e-mail
     private String email; // email do usuario
 
-    @NotBlank // --> Campo obrigatorio!
     @Size(min = 6, max = 18) // --> Validação do tamanho da senha
     private String password; // nova senha para ser cadastrada
 
