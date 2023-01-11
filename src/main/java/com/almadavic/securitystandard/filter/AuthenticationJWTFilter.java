@@ -44,7 +44,7 @@ public class AuthenticationJWTFilter extends OncePerRequestFilter {
         String idUser = tokenService.getIdUser(token);
         Optional<User> userOptional = userRepository.findById(idUser);
 
-        if(userOptional.isPresent()) {
+        if (userOptional.isPresent()) {
             User user = userOptional.get();
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -8,10 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 
-
-
-
-@AllArgsConstructor
+@AllArgsConstructor //Usado na parte de TESTES -> Para instanciar um DTO!
 @Getter
 // A classe não precisa de setter nem construtor personalisado, pois o spring já injeta os dados do Json. Foi criada essa linha por causa dos testes.
 @JsonPropertyOrder(value = {"yourPassword", "newPassword"})

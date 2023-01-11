@@ -41,6 +41,6 @@ public class Role implements GrantedAuthority { // A classe que representam os p
 
     @Override
     public String toString() {
-        return "Id: " + id + ", Name: " +getAuthority();
+        return "Id: " + id + ", Name: " + getAuthority();
     }
 }

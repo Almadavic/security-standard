@@ -1,6 +1,6 @@
 package com.almadavic.securitystandard.service.businessRule.changePassword;
 
-import com.almadavic.securitystandard.service.exception.DatabaseException;
+import com.almadavic.securitystandard.service.customException.DatabaseException;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

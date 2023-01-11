@@ -1,7 +1,7 @@
 package com.almadavic.securitystandard.service.businessRule.registerUser;
 
 
-import com.almadavic.securitystandard.service.exception.PasswordDoesntMatchRegisterUserException;
+import com.almadavic.securitystandard.service.customException.PasswordDoesntMatchRegisterUserException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

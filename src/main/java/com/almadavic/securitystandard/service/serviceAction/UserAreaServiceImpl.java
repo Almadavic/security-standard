@@ -15,7 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
-@RequiredArgsConstructor // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
+@RequiredArgsConstructor
+// Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
 @Primary // Essa vai ser a implementação principal a ser carregada.
 public class UserAreaServiceImpl implements UserAreaService { // Serviço relacionado a area do usuário no sistema.
 
@@ -45,7 +46,7 @@ public class UserAreaServiceImpl implements UserAreaService { // Serviço relaci
 
     private void updatePassword(ChangePasswordDTO cpDTO, User userLogged) { // Método pega a senha (nova) passado pelo usuário e altera a senha da conta com essa nova senha.
 
-        String newPassword = encodePassword(cpDTO.getNewPassword() , encoder); // Codifica a senha , (mais informações na declaração do método).
+        String newPassword = encodePassword(cpDTO.getNewPassword(), encoder); // Codifica a senha , (mais informações na declaração do método).
 
         userLogged.setPassword(newPassword); // Seta a senha codificada no usuário.
 

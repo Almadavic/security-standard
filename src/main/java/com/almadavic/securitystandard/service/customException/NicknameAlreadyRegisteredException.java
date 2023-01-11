@@ -1,4 +1,4 @@
-package com.almadavic.securitystandard.service.exception;
+package com.almadavic.securitystandard.service.customException;
 
 import java.io.Serial;
 

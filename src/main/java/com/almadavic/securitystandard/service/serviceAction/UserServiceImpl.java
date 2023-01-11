@@ -11,7 +11,7 @@ import com.almadavic.securitystandard.repository.UserRepository;
 import com.almadavic.securitystandard.service.businessRule.findUsersByParameter.*;
 import com.almadavic.securitystandard.service.businessRule.registerUser.RegisterUserArgs;
 import com.almadavic.securitystandard.service.businessRule.registerUser.RegisterUserVerification;
-import com.almadavic.securitystandard.service.exception.ResourceNotFoundException;
+import com.almadavic.securitystandard.service.customException.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

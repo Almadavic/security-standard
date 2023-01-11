@@ -3,7 +3,7 @@ package com.almadavic.securitystandard.service.businessRule.registerUser;
 
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.repository.UserRepository;
-import com.almadavic.securitystandard.service.exception.NicknameAlreadyRegisteredException;
+import com.almadavic.securitystandard.service.customException.NicknameAlreadyRegisteredException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

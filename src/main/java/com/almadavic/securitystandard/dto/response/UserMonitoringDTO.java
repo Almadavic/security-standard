@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 
 @Getter
 @JsonPropertyOrder(value = {"id", "nickname", "email", "roles", "registrationMoment"})
+// Estou garantindo a ordem dos atributos no JSON.
 public class UserMonitoringDTO extends UserDTO { // DTO que será retornado pro client, representa o usuário ( na visão do administrador).
 
-    @JsonProperty(value = "id")
+    @JsonProperty(value = "id")  // Dando nome para o atributo no JSON
     private final String id; // id do usuário
 
-    @JsonProperty(value = "roles")
+    @JsonProperty(value = "roles")  // Dando nome para o atributo no JSON
     private final List<RoleDTO> rolesDTO; // roles do usuario
 
     public UserMonitoringDTO(User user) {

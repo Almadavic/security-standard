@@ -1,4 +1,4 @@
-package com.almadavic.securitystandard.config.extraConfig;
+package com.almadavic.securitystandard.config;
 
 import com.almadavic.securitystandard.entity.Role;
 import com.almadavic.securitystandard.entity.User;
