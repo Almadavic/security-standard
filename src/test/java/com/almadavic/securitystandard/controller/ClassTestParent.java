@@ -33,8 +33,8 @@ public class ClassTestParent {
 
     @Autowired
     private TokenService tokenService;
-    
-    protected String authenticate(LoginDTO loginData)  { // Authentica o usuário
+
+    protected String authenticate(LoginDTO loginData) { // Authentica o usuário
 
         UsernamePasswordAuthenticationToken login = loginData.toConvert();   // converter os dados passado pelo usuario em um token de autenticação
 
@@ -42,7 +42,7 @@ public class ClassTestParent {
 
         String token = tokenService.generateToken(authentication); // Gera o token
 
-        return "Bearer "+token; // Retorna o token
+        return "Bearer " + token; // Retorna o token
     }
 
 }
