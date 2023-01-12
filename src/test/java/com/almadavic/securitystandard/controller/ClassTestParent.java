@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 public class ClassTestParent {
 
@@ -43,6 +44,7 @@ public class ClassTestParent {
         String token = tokenService.generateToken(authentication); // Gera o token
 
         return "Bearer " + token; // Retorna o token
+
     }
 
 }

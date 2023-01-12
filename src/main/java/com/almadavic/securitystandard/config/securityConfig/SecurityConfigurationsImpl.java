@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.config.securityConfig;
 
+
 import com.almadavic.securitystandard.config.exceptionConfig.handler.ForbiddenHandler;
 import com.almadavic.securitystandard.config.exceptionConfig.handler.UnauthorizedHandler;
 import com.almadavic.securitystandard.filter.AuthenticationJWTFilter;
@@ -25,6 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
+
 @RequiredArgsConstructor
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
 @EnableWebSecurity
@@ -35,8 +37,8 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations { // A
     // Nas proximas requisições, essa classe não é chamada dnv, pois as conf já estão salvas.
 
     private final TokenService tokenService; // Classe que contém ações de um token como gerar um token...
-    private final UserRepository userRepository; // Repositório da entidade Usuário
 
+    private final UserRepository userRepository; // Repositório da entidade Usuário
 
     @Override
     @Bean
@@ -62,12 +64,11 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations { // A
                 .anyRequest().authenticated() // Qualquer outro recurso, sem ser os de cima, poderão ser acessados apenas se estiver autenticado.
                 .and().cors() // Libera a integração de aplicações externas como o front-end á essa API.
                 .and().headers().frameOptions().disable() // É para bloquear a página de login ser colocada em um iFrame
-                .and().csrf().disable() // Comentário sobre essa conf na linha 92.
+                .and().csrf().disable() // Comentário sobre essa conf na linha 94.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // DIZ QUE A APLICAÇÃO NÃO TEM ESTADO, OS DADOS SÃO GUARDADOS EM UM TOKEN!
                 .and().addFilterBefore(new AuthenticationJWTFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class) // Adiciona um FILTRO, Antes
                 .exceptionHandling().authenticationEntryPoint(new UnauthorizedHandler()) // Essa linha vai chamar a classe Unhautorize... para lídar com o erro 401.
                 .and().exceptionHandling().accessDeniedHandler(new ForbiddenHandler());    // Essa linha chama a classe Forbidden para lídar com o erro 403.
-
 
         return http.build();
     }

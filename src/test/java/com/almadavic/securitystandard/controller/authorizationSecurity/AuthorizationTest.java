@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest // Indica que estamos fazendo testes com spring, onde a aplicação sobe.
 @AutoConfigureMockMvc // Utilizaremos mocks nos testes
@@ -28,6 +29,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
         mockMvc.perform(get("/userarea/myprofile"))
                 .andExpect(status().is(unauthorized));
+
     }
 
     @Test
@@ -38,6 +40,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
         mockMvc.perform(put("/userarea/changepassword"))
                 .andExpect(status().is(unauthorized));
+
     }
 
     @Test
@@ -48,6 +51,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
         mockMvc.perform(get("/users"))
                 .andExpect(status().is(unauthorized));
+
     }
 
     @Test
@@ -64,6 +68,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
         mockMvc.perform(get("/users")
                         .header("Authorization", token))
                 .andExpect(status().is(forbidden));
+
     }
 
     @Test
@@ -74,6 +79,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
         mockMvc.perform(get("/users/{id}", "teste")) // Não tem nenhuma variavel para id, mas oq importa é dar o erro unhautorizen.
                 .andExpect(status().is(unauthorized));
+
     }
 
     @Test
@@ -90,6 +96,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
         mockMvc.perform(get("/users/{id}", "teste") // Não tem nenhuma variavel para id, mas oq importa é dar o erro forbidden.
                         .header("Authorization", token))
                 .andExpect(status().is(forbidden));
+
     }
 
     @Test
@@ -99,6 +106,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
         mockMvc.perform(get("/recursoinvalido"))
                 .andExpect(status().is(unauthorized));
+
     }
 
     @Test
@@ -130,7 +138,6 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(status().is(notFound));
 
-
     }
 
 
@@ -144,6 +151,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
         mockMvc.perform(post("/auth"))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
     }
 
     @Test
@@ -161,8 +169,8 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
-    }
 
+    }
 
     @Test
     void accessMyProfileAllowedRoleUser() throws Exception {  // Método testa o acesso ao recurso /userarea/myprofile , usuario role = user. O sistema deve deixar.
@@ -178,6 +186,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
     }
 
     @Test
@@ -194,6 +203,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
 
     }
 
@@ -224,6 +234,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
         mockMvc.perform(post("/users/register"))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
     }
 
     @Test
@@ -240,6 +251,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
     }
 
     @Test
@@ -253,7 +265,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
         String token = authenticate(loginData);
 
         mockMvc.perform(get("/users/{id} ", "teste")
-                .header("Authorization", token))
+                        .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
 

@@ -1,11 +1,13 @@
 package com.almadavic.securitystandard.dto.request;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 @AllArgsConstructor //Usado na parte de TESTES -> Para instanciar um DTO!
@@ -22,4 +24,5 @@ public class ChangePasswordDTO { // DTO que representa a mudança de senha do us
     @Size(min = 6, max = 18) // --> Validação do tamanho da senha
     @JsonProperty(value = "newPassword")
     private String newPassword; // Nova senha.
+
 }

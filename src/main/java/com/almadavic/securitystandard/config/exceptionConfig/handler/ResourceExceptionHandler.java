@@ -5,7 +5,6 @@ import com.almadavic.securitystandard.config.exceptionConfig.standardError.commo
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.validationArgsStandardError.StandardErrorArgsNotValid;
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.validationArgsStandardError.ValidationErrorCollection;
 import com.almadavic.securitystandard.service.customException.*;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
 
 @ControllerAdvice
 // // Se ocorrer alguma das execções abaixo durante o programa, o Spring vai cair nessa classe e vai retornar o erro  de uma forma mais agradavél pro cliente.
@@ -49,6 +49,7 @@ public class ResourceExceptionHandler {
         });
         log(exception);
         return ResponseEntity.status(status).body(validationErrs);
+
     }
 
     @ExceptionHandler(value = PropertyReferenceException.class)

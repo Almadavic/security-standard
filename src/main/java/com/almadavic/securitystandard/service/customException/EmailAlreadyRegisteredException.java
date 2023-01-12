@@ -1,6 +1,8 @@
 package com.almadavic.securitystandard.service.customException;
 
+
 import java.io.Serial;
+
 
 public class EmailAlreadyRegisteredException extends RuntimeException { // Erro quando o usuário tenta cadastrar uma conta com um e-mail que já exista.
 
@@ -10,4 +12,5 @@ public class EmailAlreadyRegisteredException extends RuntimeException { // Erro 
     public EmailAlreadyRegisteredException(String msg) {
         super(msg);
     }
+
 }

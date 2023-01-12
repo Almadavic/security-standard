@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest
 public class RegistrationUserTest {
@@ -21,8 +22,7 @@ public class RegistrationUserTest {
     @Test
     void returnRegisterData() {
 
-
-        RegisterUserDTO userRequestDTO = new RegisterUserDTO("paulo","paulo@hotmail.com","1234567","1234567");
+        RegisterUserDTO userRequestDTO = new RegisterUserDTO("paulo", "paulo@hotmail.com", "1234567", "1234567");
 
         UserMonitoringDTO userResponseDTO = userService.register(userRequestDTO);
 
@@ -31,4 +31,5 @@ public class RegistrationUserTest {
         Assertions.assertEquals(userResponseDTO.getRolesDTO().get(0).getRoleName(), RoleName.ROLE_USER.name());
 
     }
+
 }

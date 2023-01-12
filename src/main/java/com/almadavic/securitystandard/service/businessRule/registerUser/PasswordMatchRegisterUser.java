@@ -5,6 +5,7 @@ import com.almadavic.securitystandard.service.customException.PasswordDoesntMatc
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+
 @Component
 // Indica que essa classe será gerenciada automaticamente pelo Spring em momento de execução, não precisaremos instanciar manualmente.
 @Order(3) // Ordem de chamada da classe, no caso de uma lista por exemplo.

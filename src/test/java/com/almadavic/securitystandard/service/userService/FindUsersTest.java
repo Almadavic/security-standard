@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
+
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest
 public class FindUsersTest {
@@ -23,7 +24,6 @@ public class FindUsersTest {
 
     @Autowired
     private UserRepository userRepository;
-
 
     @Test
     void findUsersParameterAdministrator() {
@@ -67,7 +67,6 @@ public class FindUsersTest {
 
     }
 
-
     @Test
     void findById() {
 
@@ -80,7 +79,6 @@ public class FindUsersTest {
         Assertions.assertEquals(id, userDTO.getId());
 
     }
-
 
 }
 

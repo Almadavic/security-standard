@@ -16,12 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest // Indica que estamos fazendo testes com spring, onde a aplicação sobe.
 @AutoConfigureMockMvc // Utilizaremos mocks nos testes
 public class RegistrationUserTest extends ClassTestParent {  // Classe testa a funcionalidade de cadastrar um usuário no banco.
-
 
     @Test
     void nicknameAlreadyRegistered() throws Exception { // Método deve falhar pois já existe um usuário no banco com esse nickname.
@@ -53,7 +51,6 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
 
     }
 
-
     @Test
     void passwordsDontMatch() throws Exception {  // Método deve falhar pois o usuário está passando 2 senhas que não correspondem.
 
@@ -82,6 +79,5 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
                         result.getResponse().getContentAsString()));
 
     }
-
 
 }

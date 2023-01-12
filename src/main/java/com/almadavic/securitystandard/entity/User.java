@@ -1,14 +1,16 @@
 package com.almadavic.securitystandard.entity;
 
-import javax.persistence.*;
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 
 @Entity             // Indica que será uma tabela do banco de dados.
 @Table(name = "tb_users")    // nome da tabela do banco de dados, será uma tabela de usuários.
@@ -40,7 +42,6 @@ public class User implements UserDetails {    // Classe  do banco - > User | Rep
     @Getter(AccessLevel.NONE)
     // Mesmo caso do email, devido a interface DefaultUser... q implementa o UserDetails, ja temos um get que retorna a senha.
     private String password; // Representa a senha do usuário
-
 
     @Column(name = "REGISTRATION_MOMENT", nullable = false) // name -> nome do campo , nullable -> se pode ser nullo
     @CreationTimestamp
@@ -104,6 +105,9 @@ public class User implements UserDetails {    // Classe  do banco - > User | Rep
         return true;
     }
 
+
+    // MÉTODO toString
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -116,6 +120,7 @@ public class User implements UserDetails {    // Classe  do banco - > User | Rep
         sb.append("---Roles---\n");
         sb.append("\n");
         return sb.toString();
+
     }
 
 }

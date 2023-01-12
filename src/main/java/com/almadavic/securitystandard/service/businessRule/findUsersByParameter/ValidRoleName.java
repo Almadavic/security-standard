@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.service.businessRule.findUsersByParameter;
 
+
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -29,5 +30,7 @@ public class ValidRoleName extends FindUsersByRoleNameVerification {  // Valida�
         }
 
         return nextOne.verification(args); // Caso não aconteça, vai chamar a proxima validação
+
     }
+
 }

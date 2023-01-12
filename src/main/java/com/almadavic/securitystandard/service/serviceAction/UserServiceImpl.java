@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
 @RequiredArgsConstructor
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
@@ -42,9 +43,9 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // Método que mostra pro spring security como será feita a autenticação.
+
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with this e-mail : " + username));
-
         return user;
     }
 

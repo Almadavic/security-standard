@@ -1,13 +1,15 @@
 package com.almadavic.securitystandard.entity;
 
+
 import com.almadavic.securitystandard.enumerated.RoleName;
-import javax.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 
 @Entity             // Indica que será uma tabela do banco de dados.
 @Table(name = "tb_roles")    // nome da tabela do banco de dados, será uma tabela de roles.
@@ -43,4 +45,5 @@ public class Role implements GrantedAuthority { // A classe que representam os p
     public String toString() {
         return "Id: " + id + ", Name: " + getAuthority();
     }
+
 }

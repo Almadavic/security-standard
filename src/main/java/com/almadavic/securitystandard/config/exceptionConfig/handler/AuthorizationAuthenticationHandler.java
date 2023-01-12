@@ -4,11 +4,11 @@ package com.almadavic.securitystandard.config.exceptionConfig.handler;
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.commonStandardError.StandardError;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
 import java.io.IOException;
+
 
 public class AuthorizationAuthenticationHandler { // A classe será utilizada por 2 handles, essa classe atual tem o papel de retornar a
     //resposta para cliente. Essa resposta será enviado dependendo em qual handler foi chamado, Forbidden ou Unauthorized.
@@ -23,6 +23,7 @@ public class AuthorizationAuthenticationHandler { // A classe será utilizada po
 
     protected void responseClient(HttpServletRequest request, HttpServletResponse response, int status, String error, String messageError) { // Indica a resposta que será retornada pro cliente.
         try {
+
             objectMapper.registerModule(new JavaTimeModule());
 
             response.setStatus(status);
@@ -37,6 +38,7 @@ public class AuthorizationAuthenticationHandler { // A classe será utilizada po
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
 }

@@ -1,9 +1,11 @@
 package com.almadavic.securitystandard.dto.response;
 
+
 import com.almadavic.securitystandard.entity.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
+
 
 @Getter // Anotação utilizada apenas no teste
 @JsonPropertyOrder(value = {"roleName"}) // Estou garantindo a ordem dos atributos no JSON.

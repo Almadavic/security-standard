@@ -1,6 +1,8 @@
 package com.almadavic.securitystandard.service.serviceAction;
 
+
 import org.springframework.security.core.Authentication;
+
 
 public interface TokenService {
 

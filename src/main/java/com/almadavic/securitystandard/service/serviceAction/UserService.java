@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+
 public interface UserService extends UserDetailsService, EncodePassword {  // Service de user deve implementar essa interface.
 
     UserMonitoringDTO register(RegisterUserDTO registerData); // método com a lógica para se registrar no sistema.

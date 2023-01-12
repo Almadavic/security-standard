@@ -1,11 +1,11 @@
 package com.almadavic.securitystandard.config;
 
+
 import com.almadavic.securitystandard.entity.Role;
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.enumerated.RoleName;
 import com.almadavic.securitystandard.repository.RoleRepository;
 import com.almadavic.securitystandard.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -74,11 +74,11 @@ public class StartProjectConfigurations implements CommandLineRunner { // Essa c
 
     }
 
-    /*
+}
+
+  /*
          ------ EXPLICAÇÃO CLASSE --------
          É criado um usuário, uma role e são associados entre sí no banco (ManyToMany), O método popula o banco com esses dados para facilitar os testes pelo
          postman, para não ter que ficar criando os dados de cadastro de forma obrigatória toda vez quando não desejado. Além disso, nos permite verificar se o
          relacionamento entre as classes está correto.
      */
-}
-

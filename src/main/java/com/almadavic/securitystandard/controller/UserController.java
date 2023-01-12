@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.controller;
 
+
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.commonStandardError.StandardError;
 import com.almadavic.securitystandard.dto.request.RegisterUserDTO;
 import com.almadavic.securitystandard.dto.response.UserMonitoringDTO;
@@ -24,17 +25,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 
 
-@Tag(name = "user" , description = "Operations about user") // Como será chamado o nome do "controller" no swagger e a descrição.
+@Tag(name = "user", description = "Operations about user")
+// Como será chamado o nome do "controller" no swagger e a descrição.
 public interface UserController { // Controller User deve implementar essa interface
 
     @Operation(summary = "Sign up in the System.")
     @ApiResponses(value = {   // Informações relacionadas ao response!
             @ApiResponse(responseCode = "201", description = "User registered",
-                    content = {@Content(mediaType = "application/json" , schema = @Schema(implementation = String.class))}),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode = "400", description = "The passwords don't match",
-                    content = {@Content(mediaType = "application/json" , schema = @Schema(implementation = StandardError.class))}),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
             @ApiResponse(responseCode = "500", description = "The e-mail or nickname entered already exist in the system",
-                    content = {@Content(mediaType = "application/json" , schema = @Schema(implementation = StandardError.class))}),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
     })
     ResponseEntity<String> register(@RequestBody @Valid RegisterUserDTO registerData, UriComponentsBuilder uriBuilder); // Método para se registrar no sistema
 
@@ -42,21 +44,21 @@ public interface UserController { // Controller User deve implementar essa inter
     @Operation(summary = "Find all the users from the system.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {   // Informações relacionadas ao response!
             @ApiResponse(responseCode = "200", description = "Find users successfully",
-                    content = {@Content(mediaType = "application/json" ,
-                           array = @ArraySchema( schema = @Schema(implementation = UserMonitoringDTO.class)))}),
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserMonitoringDTO.class)))}),
             @ApiResponse(responseCode = "400", description = "The parameter {role} in URI is invalid",
-                    content = {@Content(mediaType = "application/json" , schema = @Schema(implementation = StandardError.class))}),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
     })
     ResponseEntity<Page<UserMonitoringDTO>> findAll(@PageableDefault(sort = "email", direction = Sort.Direction.ASC, size = 12) // Método que retorna uma page de users do sistema.
-                                          Pageable pageable, @RequestParam(required = false, value = "role") String roleName);
+                                                    Pageable pageable, @RequestParam(required = false, value = "role") String roleName);
 
 
     @Operation(summary = "Find an user from the system by id.", security = {@SecurityRequirement(name = "bearer-key")})
     @ApiResponses(value = {   // Informações relacionadas ao response!
             @ApiResponse(responseCode = "200", description = "Find user successfully",
-                    content = {@Content(mediaType = "application/json" , schema = @Schema(implementation = UserMonitoringDTO.class))}),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = UserMonitoringDTO.class))}),
             @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(mediaType = "application/json" , schema = @Schema(implementation = StandardError.class))}),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
     })
     ResponseEntity<UserMonitoringDTO> findById(@PathVariable String id); // Método que retorna um usuário específico do banco por ID.
 

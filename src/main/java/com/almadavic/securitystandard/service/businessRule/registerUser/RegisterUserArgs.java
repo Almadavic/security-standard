@@ -6,6 +6,7 @@ import com.almadavic.securitystandard.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+
 @AllArgsConstructor
 @Getter
 public class RegisterUserArgs { // Argumentos necessários para poder verificar se um usuário pode ser registrado no banco.

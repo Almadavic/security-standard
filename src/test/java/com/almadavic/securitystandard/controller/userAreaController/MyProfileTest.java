@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.controller.userAreaController;
 
+
 import com.almadavic.securitystandard.controller.ClassTestParent;
 import com.almadavic.securitystandard.dto.request.LoginDTO;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest // Indica que estamos fazendo testes com spring, onde a aplicação sobe.
@@ -25,7 +27,7 @@ public class MyProfileTest extends ClassTestParent { // Classe testa o recurso /
         String token = authenticate(loginData);
 
         mockMvc.perform(get(path)
-                .header("Authorization",token))
+                        .header("Authorization", token))
                 .andExpect(status().is(ok));
 
     }
@@ -38,8 +40,9 @@ public class MyProfileTest extends ClassTestParent { // Classe testa o recurso /
         String token = authenticate(loginData);
 
         mockMvc.perform(get(path)
-                .header("Authorization",token))
+                        .header("Authorization", token))
                 .andExpect(status().is(ok));
 
     }
+
 }

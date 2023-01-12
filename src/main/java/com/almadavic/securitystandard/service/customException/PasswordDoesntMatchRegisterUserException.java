@@ -1,6 +1,8 @@
 package com.almadavic.securitystandard.service.customException;
 
+
 import java.io.Serial;
+
 
 public class PasswordDoesntMatchRegisterUserException extends RuntimeException { // Erro quando o usuário tenta registrar um usuário e os campos da senha não correspondem
 
@@ -10,4 +12,5 @@ public class PasswordDoesntMatchRegisterUserException extends RuntimeException {
     public PasswordDoesntMatchRegisterUserException(String msg) {
         super(msg);
     }
+
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
 @Primary // Essa vai ser a implementação principal a ser carregada.
 public class TokenServiceImpl implements TokenService { // Serviço relacionado ao token.
@@ -60,5 +61,7 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
     public String getIdUser(String token) { // Método que recupera o Id do Usuário pelo token.
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
         return claims.getSubject();
+
     }
+
 }

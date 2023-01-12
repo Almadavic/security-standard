@@ -1,11 +1,11 @@
 package com.almadavic.securitystandard.controller;
 
+
 import com.almadavic.securitystandard.config.securityConfig.Token;
 import com.almadavic.securitystandard.dto.request.LoginDTO;
 import com.almadavic.securitystandard.service.serviceAction.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationControllerImpl implements AuthenticationController {         // Controller para fazer a autenticação
 
     private final AuthenticationService authService;  // Injeção de dependencia automatica - > AuthenticationService
-
 
     @Override
     @PostMapping  // // Método HTTP POST - Cadastrar / Criar

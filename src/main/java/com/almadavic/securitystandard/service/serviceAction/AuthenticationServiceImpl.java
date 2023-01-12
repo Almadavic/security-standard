@@ -12,8 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
-@RequiredArgsConstructor // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
+@RequiredArgsConstructor
+// Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
 @Primary // Essa vai ser a implementação principal a ser carregada.
 public class AuthenticationServiceImpl implements AuthenticationService { // Serviço relacionado a autenticação do usuário no sistema.
 
@@ -31,10 +33,12 @@ public class AuthenticationServiceImpl implements AuthenticationService { // Ser
 
             String token = tokenService.generateToken(authentication);   // geração do token, e esse token é devolvido para o controller para ser enviado ao client.
 
-            return new Token(token,"Bearer");
+            return new Token(token, "Bearer");
 
         } catch (AuthenticationException e) {
             throw new DatabaseException("E-mail and / or password is / are wrong!");       // Causará um erro caso os dados passados pelo usuário estejam errados.
         }
+
     }
+
 }

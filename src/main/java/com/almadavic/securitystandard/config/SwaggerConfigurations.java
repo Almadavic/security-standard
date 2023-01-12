@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.config;
 
+
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -16,14 +17,17 @@ public class SwaggerConfigurations { // Configurações do SWAGGER !
 
     @Bean
     public GroupedOpenApi publicApi() {
+
         return GroupedOpenApi.builder()
                 .group("SecuritySkeletonAPI")
                 .pathsToMatch("/**")
                 .build();
+
     }
 
     @Bean
     public OpenAPI almadaAPI() { // Nesse método estão algumas configurações que apareceram na interface do swagger e confs de autorização.
+
         return new OpenAPI()
                 .info(new Info().title("SecuritySkeletonAPI")
                         .description("My standard project for authentication and authorization.")
@@ -33,8 +37,8 @@ public class SwaggerConfigurations { // Configurações do SWAGGER !
                         .scheme("bearer")
                         .bearerFormat("JWT")))
                 .externalDocs(new ExternalDocumentation());
-    }
 
+    }
 
 }
 

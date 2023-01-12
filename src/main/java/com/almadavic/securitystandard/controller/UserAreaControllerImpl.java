@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.controller;
 
+
 import com.almadavic.securitystandard.dto.request.ChangePasswordDTO;
 import com.almadavic.securitystandard.dto.response.UserDTO;
 import com.almadavic.securitystandard.entity.User;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RequiredArgsConstructor // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
+@RequiredArgsConstructor
+// Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
 @RestController   // Identificando  que é um rest-controller
 @RequestMapping(value = "/userarea")   // Recurso para "encontrar" esse controller
 public class UserAreaControllerImpl implements UserAreaController { // Controller onde os usuários interagem, (AREA DO USUARIO)
@@ -36,6 +38,5 @@ public class UserAreaControllerImpl implements UserAreaController { // Controlle
 
         return ResponseEntity.ok().body(message);
     }
-
 
 }

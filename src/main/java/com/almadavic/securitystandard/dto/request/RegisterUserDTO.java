@@ -1,11 +1,12 @@
 package com.almadavic.securitystandard.dto.request;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 
 @AllArgsConstructor //Usado na parte de TESTES -> Para instanciar um DTO!

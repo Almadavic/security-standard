@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
 @RequiredArgsConstructor
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
@@ -25,7 +26,6 @@ public class UserAreaServiceImpl implements UserAreaService { // Serviço relaci
     private final PasswordEncoder encoder; //  injeção de dependencia de Encoder - > codificar uma senha para ser salva no banco e para fazer validação (match)
 
     private final List<ChangePasswordVerification> changePasswordVerifications; // List com regras de negocio (verificacão) relacionadas a troca de senha.
-
 
     @Override
     public UserDTO myProfile(User userLogged) { // Principal - Usuário logado , método retorna as informações do usuário logado.
@@ -42,6 +42,7 @@ public class UserAreaServiceImpl implements UserAreaService { // Serviço relaci
         userRepository.save(userLogged); // salva o usuário COM A SENHA ALTERADA no banco de dados novamente.
 
         return "Password changed successfully!"; // retorna uma mensagem que a alteração de senha foi feita com sucesso
+
     }
 
     private void updatePassword(ChangePasswordDTO cpDTO, User userLogged) { // Método pega a senha (nova) passado pelo usuário e altera a senha da conta com essa nova senha.

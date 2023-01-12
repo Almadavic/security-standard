@@ -1,6 +1,8 @@
 package com.almadavic.securitystandard.service.customException;
 
+
 import java.io.Serial;
+
 
 public class NicknameAlreadyRegisteredException extends RuntimeException { // Erro quando o usuário tenta cadastrar uma conta com um nickname que já exista.
 
@@ -10,4 +12,5 @@ public class NicknameAlreadyRegisteredException extends RuntimeException { // Er
     public NicknameAlreadyRegisteredException(String msg) {
         super(msg);
     }
+
 }

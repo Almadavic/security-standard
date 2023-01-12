@@ -1,10 +1,12 @@
 package com.almadavic.securitystandard.dto.request;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 
 @AllArgsConstructor //Usado na parte de TESTES -> Para instanciar um DTO!

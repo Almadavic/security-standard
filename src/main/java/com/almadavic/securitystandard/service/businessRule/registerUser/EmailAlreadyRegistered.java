@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+
 @Component
 // Indica que essa classe será gerenciada automaticamente pelo Spring em momento de execução, não precisaremos instanciar manualmente.
 @Order(2) // Ordem de chamada da classe, no caso de uma lista por exemplo.
@@ -27,4 +28,5 @@ public class EmailAlreadyRegistered implements RegisterUserVerification { // Se 
         }
 
     }
+
 }

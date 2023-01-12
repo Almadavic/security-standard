@@ -1,7 +1,6 @@
 package com.almadavic.securitystandard.controller.userController;
 
 
-
 import com.almadavic.securitystandard.controller.ClassTestParent;
 import com.almadavic.securitystandard.dto.request.LoginDTO;
 import com.almadavic.securitystandard.entity.User;
@@ -25,24 +24,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc // Utilizaremos mocks nos testes
 public class FindUsersTest extends ClassTestParent { // Classe testa a busca de usuário no sistema.
 
-
-     private final String path = "/users";
+    private final String path = "/users";
 
     @Autowired
     private UserRepository userRepository; // Utilizado para buscar um usuário do banco ( foi utilizado no caso do findById) onde precisava saber o Id do usuário, por causa do UUID.
 
-
     @Test
     void findUsersParameterUser() throws Exception { // Método deve retornar todos os usuários do sistema que tem a role USER
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com","123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
         String param = "USER";
 
-        mockMvc.perform(get(path+"?role={param}",param)
-                        .header("Authorization",token))
+        mockMvc.perform(get(path + "?role={param}", param)
+                        .header("Authorization", token))
                 .andExpect(status().is(ok));
 
     }
@@ -50,14 +47,14 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersParameterAdministrator() throws Exception { // Método deve retornar todos os usuários do sistema que tem a role ADMINISTRATOR
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com","123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
         String param = "ADMIN";
 
-        mockMvc.perform(get(path+"?role={param}",param)
-                        .header("Authorization",token))
+        mockMvc.perform(get(path + "?role={param}", param)
+                        .header("Authorization", token))
                 .andExpect(status().is(ok));
 
     }
@@ -65,12 +62,12 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersNoParameter() throws Exception { // Método retorna todos os usuários do sistema sem passar parametro na URI.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com","123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
         mockMvc.perform(get(path)
-                        .header("Authorization",token))
+                        .header("Authorization", token))
                 .andExpect(status().is(ok));
 
     }
@@ -78,14 +75,14 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersInvalidParameter() throws Exception { // Método deve falhar, pois passei um nome de role inválido.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com","123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
         String param = "INVALIDO";
 
-        mockMvc.perform(get(path+"?role={param}",param)
-                        .header("Authorization",token))
+        mockMvc.perform(get(path + "?role={param}", param)
+                        .header("Authorization", token))
                 .andExpect(status().is(badRequest))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof InvalidParamException))
                 .andExpect(result -> assertEquals("This parameter (role) : { " + param + " } is invalid"
@@ -96,16 +93,17 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUserByIdSuccess() throws Exception { // Método retorna um usuario especifico do banco.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com","123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
-        User user = userRepository.findByEmail("user1@hotmail.com").get();
+        User user = userRepository.findByEmail("user1@hotmail.com").orElseThrow(() ->
+                new ResourceNotFoundException("User wasn't found on database"));
 
         String id = user.getId();
 
-        mockMvc.perform(get(path+"/{id}", id)
-                        .header("Authorization",token))
+        mockMvc.perform(get(path + "/{id}", id)
+                        .header("Authorization", token))
                 .andExpect(status().is(ok));
 
     }
@@ -113,18 +111,19 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUserByIdNotFound() throws Exception { // Método deve falhar, pois passei um id cujo não existe nenhum usuário no banco cadastrado com o mesmo.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com","123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
         String id = "2";
 
-        mockMvc.perform(get(path+"/{id}", id)
-                        .header("Authorization",token))
+        mockMvc.perform(get(path + "/{id}", id)
+                        .header("Authorization", token))
                 .andExpect(status().is(notFound))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> assertEquals("The user id: " + id + " wasn't found on database"
                         , result.getResolvedException().getMessage()));
+
     }
 
 }

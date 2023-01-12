@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.service.businessRule.changePassword;
 
+
 import com.almadavic.securitystandard.service.customException.DatabaseException;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Order(1) // Ordem de chamada da classe, no caso de uma lista por exemplo.
 public class PasswordMatchsDataBasePassword implements ChangePasswordVerification { // Regra de négocio que verifica se o
     // usuário está digitando sua senha corretamente para poder muda-lá.
-
 
     @Override
     public void verification(ChangePasswordArgs args) { // Método que faz a verificação
@@ -27,6 +27,5 @@ public class PasswordMatchsDataBasePassword implements ChangePasswordVerificatio
         }
 
     }
-
 
 }

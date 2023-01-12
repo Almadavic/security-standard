@@ -17,13 +17,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest // Indica que estamos fazendo testes com spring, onde a aplicação sobe.
 @AutoConfigureMockMvc // Utilizaremos mocks nos testes
 public class ChangePasswordTest extends ClassTestParent {  // Classe testa a funcionalidade de alterar uma senha no sistema.
 
     private final String path = "/userarea/changepassword";
-
 
     @Test
     void passwordDoenstMatchDataBasePassword() throws Exception { // Alteração de senha deve falhar pois o usuário está passando sua senha incorreta.
@@ -36,7 +36,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
 
         mockMvc.perform(put(path)
                         .contentType("application/json")
-                        .header("Authorization",token)
+                        .header("Authorization", token)
                         .content(objectMapper.writeValueAsString(changePasswordDTO)))
                 .andExpect(status().is(badRequest))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof DatabaseException))
@@ -44,7 +44,6 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
                         , result.getResolvedException().getMessage()));
 
     }
-
 
     @Test
     void passwordIsEqualTheLastOne() throws Exception { // Alteração da senha deve falhar pois o usuário está passando o valor da nova senha igual da antiga.
@@ -57,7 +56,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
 
         mockMvc.perform(put(path)
                         .contentType("application/json")
-                        .header("Authorization",token)
+                        .header("Authorization", token)
                         .content(objectMapper.writeValueAsString(changePasswordDTO)))
                 .andExpect(status().is(internalServerError))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof SamePasswordException))
@@ -65,7 +64,6 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
                         , result.getResolvedException().getMessage()));
 
     }
-
 
     @Test
     void changePasswordSuccessFlow() throws Exception { // Alteração de senha deve ser feita com sucesso.
@@ -92,11 +90,11 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
 
     }
 
-    private void passwordChanged(ChangePasswordDTO changePasswordDTO , String token) throws Exception {
+    private void passwordChanged(ChangePasswordDTO changePasswordDTO, String token) throws Exception {
 
         mockMvc.perform(put(path)
                         .contentType("application/json")
-                        .header("Authorization",token)
+                        .header("Authorization", token)
                         .content(objectMapper.writeValueAsString(changePasswordDTO)))
                 .andExpect(status().is(ok))
                 .andExpect(result -> assertEquals("Password changed successfully!",
@@ -104,6 +102,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
     }
 
     private void enterSystemFail(LoginDTO loginDataAttempt1) throws Exception {
+
         mockMvc.perform(post("/auth")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(loginDataAttempt1)))
@@ -114,11 +113,11 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
     }
 
     private void enterSystemSuccess(LoginDTO loginDataAttempt2) throws Exception {
+
         mockMvc.perform(post("/auth")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(loginDataAttempt2)))
                 .andExpect(status().is(ok));
     }
-
 
 }

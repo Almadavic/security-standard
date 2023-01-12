@@ -1,5 +1,6 @@
 package com.almadavic.securitystandard.config.securityConfig;
 
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public interface SecurityConfigurations {
 
     PasswordEncoder encoder();    // Encoder de senha, codificar a senha.
+
 
     // Indica que o spring vai gerenciar a instancia do AuthenticationManager quando solicitado.
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception;
