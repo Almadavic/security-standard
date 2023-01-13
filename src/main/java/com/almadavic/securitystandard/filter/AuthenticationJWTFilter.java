@@ -55,7 +55,7 @@ public class AuthenticationJWTFilter extends OncePerRequestFilter {
 
     private String recoverToken(HttpServletRequest request) { // Método para recuperar o token
         String token = request.getHeader("Authorization");
-        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+        if (token == null  || !token.startsWith("Bearer ")) {
             return null;
         }
 

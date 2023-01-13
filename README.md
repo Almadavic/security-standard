@@ -1,5 +1,14 @@
-# SchoolSystem
---------SOBRE O QUE É A APLICAÇÃO--------
+# SecurityStandard
+
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Almadavic/security-standard/blob/main/LICENSE)
+
+
+#### Encontre o projeto online:
+
+#### Documentação do projeto no Swagger:
+
+
+ # SOBRE O QUE É A APLICAÇÃO :
 
 Essa é uma aplicação para ser o esqueleto (base) de outras API's futuras que necessitam de autenticação JWT e autorização. Além desses
 2 recursos, a API conta com outras diversas configurações padrões que podem ser aproveitadas em uma futura API, como:
@@ -17,14 +26,14 @@ Essa é uma aplicação para ser o esqueleto (base) de outras API's futuras que 
 - Funcionalidades extras além de autenticação.
 - Uma grande cobertura de testes.
 
---------OBJETIVO--------
+# OBJETIVO :
 
 Sempre que criamos uma API, temos de fazer várias configurações, até mesmo, configurações padrões, que sempre serão as mesmas
 independente da API. Isso é uma coisa que cansa muito e acaba tomando muito tempo, para resolver esse problema, desenvolvi essa
 "api esqueleto" para sempre utilizar esses padrões em uma nova api que eu esteja desenvolvendo, desse modo, economizando muito tempo.
  Obs: Essa API seria usada de base para outras API caso essa por sua vez seja uma aplicação que precise de autenticação e autorização. 
 
---------FUNCIONALIDADES--------
+# FUNCIONALIDADES :
 
   - O Usuário se registra no sistema.
   - O Usuário se autentica  no sistema.
@@ -33,21 +42,20 @@ independente da API. Isso é uma coisa que cansa muito e acaba tomando muito tem
   - O Administrador pode ver uma página de usuários cadastrados no sistema.
   - O Administrador pode ver qualquer usuário registrado no sistema em específico pelo id.
 
----------VERSIONAMENTO--------
+# VERSIONAMENTO :
 
 Versão do Java : 17
 
 Versão do Spring Boot : 2.7.7
 
---------FERRAMENTAS---------
+# FERRAMENTAS :
 
-Linguagem de Desenvolvimento :
+Back end :
 
-       Java
-
-Principal Framework :
-
-      Spring Boot.
+      - Java
+      - Spring Boot c/ Spring Security.
+      - JPA / Hibernate
+      - Maven
 
 Dependências :
 
@@ -74,9 +82,7 @@ Dependências :
      JacksonDatatype - > Utilizado para transformar objetos em JSON.
 
 Programas Utilizados :
-
-    Heroku - Utilizado para deixar o projeto na nuvem.
-    
+ 
     Postman - Utilizado para fazer as requisições (CONSUMIR) a aplicação.
     
     IntelliJ - IDE escolhida para desenvolver o projeto.
@@ -87,21 +93,28 @@ Programas Utilizados :
 
     JWT.IO - Depurar o token e ver o seu formato.
 
+    Heroku - Colocar a aplicação na nuvem, sendo acessível por usuários de qualquer lugar.
+
 Bancos de Dados :
 
     PostgreSQL - Usado em ambiente de desenvolvimento e produção.
     
     H2 - Usado em ambiente de teste.
 
-------------------------- INFORMAÇÕES ADICIONAIS ---------------------
+
+- Schema :
+
+<img src="https://user-images.githubusercontent.com/85299065/212201048-78f9aa0b-e700-4406-8a68-84b74f1b96fa.PNG" width="100%" height="100%">
+
+# INFORMAÇÕES ADICIONAIS :
 
     Linhas de Código : 2168
     
-    Classes / Arquivos implementados : 78
+    Classes / Arquivos implementados : 80
 
     Testes : 39
 
------------------------- LINKS -----------------------------
+# LINKS ADICIONAIS : 
 
 Explicação da API em vídeo no YouTube : 
 
