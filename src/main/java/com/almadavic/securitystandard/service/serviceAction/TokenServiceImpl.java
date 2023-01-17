@@ -1,17 +1,23 @@
 package com.almadavic.securitystandard.service.serviceAction;
 
 
+
+import com.almadavic.securitystandard.dto.response.RoleDTO;
 import com.almadavic.securitystandard.dto.response.UserMonitoringDTO;
 import com.almadavic.securitystandard.entity.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
 
 
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
@@ -24,44 +30,56 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
     @Value("${jwt.secret}") // var de ambiente , localização externa - application(test,prod).properties
     private String secret; // regra de como o token será codificado.
 
-    @Override
     public String generateToken(Authentication authentication) { // Método que gera um token.
 
-        User logged = (User) authentication.getPrincipal();
+        User logged = (User) authentication.getPrincipal();  // Recupera o usuário logado
 
-        Date today = new Date();
+        UserMonitoringDTO userDTO = new UserMonitoringDTO(logged); // Cria um DTO baseado no usuário logado.
 
-        Date dateExpiration = new Date(today.getTime() + Long.parseLong(expiration));
+        List<String> roles = convertFromObjectListToStringList(userDTO.getRolesDTO()); // Converte uma lista de RoleDTO para string
 
-        UserMonitoringDTO userDTO = new UserMonitoringDTO(logged);
-
-        return Jwts.builder()                          // -> método cria o hash (token) inteiro com dados do usuario, segurança e alghoritmo de codificação e compacta.
-                .setSubject(userDTO.getId())
-                .claim("username", userDTO.getNickname())
-                .claim("email", userDTO.getEmail())
-                .claim("roles", userDTO.getRolesDTO())
-                .setIssuedAt(today)
-                .setExpiration(dateExpiration)
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
-
-    }
-
-    @Override
-    public boolean isTokenValid(String token) { // Método que verifica se o Token é válido.
         try {
-            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
+            return JWT.create()                              // Cria um token baseado no usuario logado
+                    .withIssuer("SecurityStandard API")
+                    .withSubject(userDTO.getId())
+                    .withClaim("email", userDTO.getEmail())
+                    .withClaim("roles", roles)
+                    .withIssuedAt(Instant.now())  // !!!!!!!!!! Colocar JWT na frente de Spring boot c Spring Securit readme
+                    .withExpiresAt(expirationInstant())
+                    .sign(secretAlgorithm());
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Generating jwt token error", exception);
         }
     }
 
-    @Override
-    public String getIdUser(String token) { // Método que recupera o Id do Usuário pelo token.
-        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
-        return claims.getSubject();
+    public String getSubject(String token) { // Método que recupera o subject do token (ID do usuário)
+        try {
+            return JWT.require(secretAlgorithm())
+                    .withIssuer("SecurityStandard API")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("JWT Token invalid or expired!");
+        }
+    }
 
+    private List<String> convertFromObjectListToStringList(List<RoleDTO> roles) { // Método para converter uma lista de objetos em uma lista de strings
+        return roles.stream().map(String::valueOf).toList();
+    }
+
+    private Instant expirationInstant() { // Método que retorna o tempo (QUANDO) o token vai expirar
+
+        long hours = Long.parseLong(this.expiration);
+
+        Instant expiration = LocalDateTime.now().plusHours(hours)
+                .toInstant(ZoneOffset.of("-03:00"));
+
+        return expiration;
+    }
+
+    private Algorithm secretAlgorithm () { // Algoritmo de codificação.
+        return  Algorithm.HMAC256(secret);
     }
 
 }

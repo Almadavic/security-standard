@@ -8,8 +8,6 @@ public interface TokenService {
 
     String generateToken(Authentication authentication); // método para gerar o token.
 
-    boolean isTokenValid(String token); // método para verificar se o token vindo da requisição é valido.
-
-    String getIdUser(String token); // Método para obter o id do usuário através do token.
+    String getSubject(String token); // Método para obter o id do usuário através do token.
 
 }

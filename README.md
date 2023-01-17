@@ -46,14 +46,14 @@ independente da API. Isso é uma coisa que cansa muito e acaba tomando muito tem
 
 Versão do Java : 17
 
-Versão do Spring Boot : 2.7.7
+Versão do Spring Boot : 3.0.1
 
 # FERRAMENTAS :
 
 Back end :
 
       - Java
-      - Spring Boot c/ Spring Security.
+      - Spring Boot c/ Spring Security e JWT.
       - JPA / Hibernate
       - Maven
 
@@ -71,13 +71,13 @@ Dependências :
      
      Test -> Foram feitos testes na aplicação com JUNIT ( Testes de integração e Unidade).
      
-     JsonWebToken -> Foi utilizado a arquitetura REST, por isso fiz a a aplicação ser stateless e usar jwt.
+     Java-JWT -> A aplicação é stateless, por isso precisamos da biblioteca para gerar e verificar o token. 
      
      Security -> Utilizado para fazer a segurança do sistema - > Autorização e Autenticação.
      
-     OpenAPI -> Utilizado para documentar a API através dos ENDPOINTS no swagger.
+     OpenAPI -> Utilizado para documentar a API (Swagger).
      
-     LomBok -> Utilizado para evitar muitas linhas de código.
+     LomBok -> Utilizado para evitar muitas linhas de código através de annotations.
 
      JacksonDatatype - > Utilizado para transformar objetos em JSON.
 
@@ -108,9 +108,9 @@ Bancos de Dados :
 
 # INFORMAÇÕES ADICIONAIS :
 
-    Linhas de Código : 2168
+    Linhas de Código : 2180
     
-    Classes / Arquivos implementados : 80
+    Classes / Arquivos implementados : 81
 
     Testes : 39
 

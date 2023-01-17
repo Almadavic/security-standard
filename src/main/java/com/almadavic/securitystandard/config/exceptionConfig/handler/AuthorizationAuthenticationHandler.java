@@ -11,7 +11,8 @@ import java.io.IOException;
 
 
 public class AuthorizationAuthenticationHandler { // A classe será utilizada por 2 handles, essa classe atual tem o papel de retornar a
-    //resposta para cliente. Essa resposta será enviado dependendo em qual handler foi chamado, Forbidden ou Unauthorized.
+    //resposta para o cliente. Essa resposta será enviada dependendo em qual handler foi chamado ( em 1 classe retorna a mensagem de um jeito, na outra,
+    // de outro jeito. Forbidden ou Unauthorized.
 
     protected int status; // status da resposta
 
@@ -21,8 +22,9 @@ public class AuthorizationAuthenticationHandler { // A classe será utilizada po
 
     private final ObjectMapper objectMapper = new ObjectMapper(); // "Transformar" o objeto em json
 
-    protected void responseClient(HttpServletRequest request, HttpServletResponse response, int status, String error, String messageError) { // Indica a resposta que será retornada pro cliente.
-        try {
+    protected void responseClient(HttpServletRequest request, HttpServletResponse response, int status, String error, String messageError) { // Faz com que a resposta seja retornada
+                                                                                                                                                //ao cliente, e além disso, aplica alguns parametros
+        try {                                                                                                                                   // para a resposta.
 
             objectMapper.registerModule(new JavaTimeModule());
 
