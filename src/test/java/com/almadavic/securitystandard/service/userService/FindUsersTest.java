@@ -4,6 +4,7 @@ package com.almadavic.securitystandard.service.userService;
 import com.almadavic.securitystandard.dto.response.UserMonitoringDTO;
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.repository.UserRepository;
+import com.almadavic.securitystandard.service.customException.ResourceNotFoundException;
 import com.almadavic.securitystandard.service.serviceAction.UserService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -74,7 +75,8 @@ public class FindUsersTest {
     @Transactional
     void findById() {
 
-        User user = userRepository.findByEmail("admin@hotmail.com").get();
+        User user = userRepository.findByEmail("admin@hotmail.com")
+                .orElseThrow(()-> new ResourceNotFoundException("The user wasn't found on database\""));
 
         String id = user.getId();
 

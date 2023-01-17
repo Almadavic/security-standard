@@ -108,7 +108,7 @@ Bancos de Dados :
 
 # INFORMAÇÕES ADICIONAIS :
 
-    Linhas de Código : 2180
+    Linhas de Código : 2184
     
     Classes / Arquivos implementados : 81
 

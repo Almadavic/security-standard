@@ -47,7 +47,7 @@ public class AuthenticationJWTFilter extends OncePerRequestFilter {
 
     private User recoverUser(String tokenJWT) {  // Método  para recuperar o usuario logado
         String subject = tokenService.getSubject(tokenJWT); // É recuperado o sujeito do toke, no caso, o id
-        User user = userRepository.findById(subject).orElseThrow(); // Recupera o usuário relacionado com esse id
+        User user = userRepository.findById(subject).get(); // Recupera o usuário relacionado com esse id
         return user;
     }
 

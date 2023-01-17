@@ -56,7 +56,7 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations { // A
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { // Configs de Autorização.
 
-        http.authorizeRequests()        // Autorização de requests
+        http.authorizeHttpRequests()       // Autorização de requests
                 .requestMatchers("/auth","/users/register").permitAll()
                 .requestMatchers("/users" , "/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated() // Qualquer outro recurso, sem ser os de cima, poderão ser acessados apenas se estiver autenticado.
