@@ -2,10 +2,9 @@ package com.almadavic.securitystandard.entity;
 
 
 import com.almadavic.securitystandard.enumerated.RoleName;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

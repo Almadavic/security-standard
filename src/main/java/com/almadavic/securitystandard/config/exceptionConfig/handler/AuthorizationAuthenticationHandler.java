@@ -4,9 +4,9 @@ package com.almadavic.securitystandard.config.exceptionConfig.handler;
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.commonStandardError.StandardError;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 

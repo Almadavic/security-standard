@@ -5,6 +5,7 @@ import com.almadavic.securitystandard.dto.response.UserMonitoringDTO;
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.repository.UserRepository;
 import com.almadavic.securitystandard.service.serviceAction.UserService;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class FindUsersTest {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     void findUsersParameterAdministrator() {
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -47,6 +49,7 @@ public class FindUsersTest {
     }
 
     @Test
+    @Transactional
     void findUsersParameterUser() {
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -68,6 +71,7 @@ public class FindUsersTest {
     }
 
     @Test
+    @Transactional
     void findById() {
 
         User user = userRepository.findByEmail("admin@hotmail.com").get();

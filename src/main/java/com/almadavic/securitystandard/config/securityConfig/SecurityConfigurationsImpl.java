@@ -57,14 +57,12 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations { // A
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { // Configs de Autorização.
 
         http.authorizeRequests()        // Autorização de requests
-                .antMatchers("/auth").permitAll() // Estou permitindo TUDO E TODOS acessarem esse recurso no sistema
-                .antMatchers("/users/register").permitAll() // Estou permitindo TUDO E TODOS acessarem esse recurso no sistema
-                .antMatchers("/users").hasRole("ADMIN") // Para acessar esse recurso, o usuario precisa estar logado e tem que ser ADM
-                .antMatchers("/users/**").hasRole("ADMIN") // Para acessar esse recurso, o usuario precisa estar logado e tem que ser ADM
+                .requestMatchers("/auth","/users/register").permitAll()
+                .requestMatchers("/users" , "/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated() // Qualquer outro recurso, sem ser os de cima, poderão ser acessados apenas se estiver autenticado.
                 .and().cors() // Libera a integração de aplicações externas como o front-end á essa API.
                 .and().headers().frameOptions().disable() // É para bloquear a página de login ser colocada em um iFrame
-                .and().csrf().disable() // Comentário sobre essa conf na linha 94.
+                .and().csrf().disable() // Comentário sobre essa conf na linha 92.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // DIZ QUE A APLICAÇÃO NÃO TEM ESTADO, OS DADOS SÃO GUARDADOS EM UM TOKEN!
                 .and().addFilterBefore(new AuthenticationJWTFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class) // Adiciona um FILTRO, Antes
                 .exceptionHandling().authenticationEntryPoint(new UnauthorizedHandler()) // Essa linha vai chamar a classe Unhautorize... para lídar com o erro 401.
@@ -76,7 +74,7 @@ public class SecurityConfigurationsImpl implements SecurityConfigurations { // A
     @Override
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() { //Configuracoes de recursos estaticos(js, css, imagens, etc.)
-        return (web) -> web.ignoring().antMatchers
+        return (web) -> web.ignoring().requestMatchers
                 ("/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**");
     }
 
