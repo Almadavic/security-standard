@@ -10,9 +10,4 @@ public interface ChangePasswordVerification { // Regras de négocio relacionada 
 
     void verification(ChangePasswordArgs args); // As classes que implementam essa interface terão que implementar esse método.
 
-    default boolean check(String passwordDTO, String passwordUser, PasswordEncoder encoder) { // Esse método será utilizado por default nas classes que implementam essa interface.
-        return encoder.matches(passwordDTO, passwordUser);
-
-    }
-
 }

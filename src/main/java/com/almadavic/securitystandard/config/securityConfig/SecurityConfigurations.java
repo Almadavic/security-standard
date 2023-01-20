@@ -10,24 +10,17 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 
-public interface SecurityConfigurations {
+public interface SecurityConfigurations { // Interface SecurityConfigurations
 
-    PasswordEncoder encoder();    // Encoder de senha, codificar a senha.
+    PasswordEncoder encoder();    // Encoder de senha, codifica a senha.
 
-
-    // Indica que o spring vai gerenciar a instancia do AuthenticationManager quando solicitado.
+    // Autentica o usuário no sistema.
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception;
-
 
     // Configurações de autorização
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception;
 
-
-    //Configuracoes de recursos estaticos(js, css, imagens, etc.)
-    WebSecurityCustomizer webSecurityCustomizer();
-
-
-    // Permite que o servidor seja acessado em ambiente de produção por um front-end que esteja hospedado em produção eu outra host.
+    // Permite que o servidor seja consumido pelo front-end.
     CorsConfigurationSource corsConfigurationSource();
 
 }

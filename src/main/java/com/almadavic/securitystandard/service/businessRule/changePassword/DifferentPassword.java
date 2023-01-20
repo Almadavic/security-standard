@@ -18,11 +18,9 @@ public class DifferentPassword implements ChangePasswordVerification { // Regra 
 
         String newPassword = args.getCpDTO().getNewPassword(); // Nova senha que o usuário está tentando cadastrar.
 
-        String passwordDataBase = args.getUser().getPassword(); // Senha do banco de dados
+        String passwordDataBase = args.getCpDTO().getPassword(); // Senha do banco de dados
 
-        PasswordEncoder encoder = args.getEncoder();
-
-        if (check(newPassword, passwordDataBase, encoder)) {
+        if(newPassword.equals(passwordDataBase)) {
             throw new SamePasswordException("Your new password cannot be equal the last one"); // Se for igual, lança a exception
         }
 

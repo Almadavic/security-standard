@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
 @RequiredArgsConstructor
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
-@Primary // Essa vai ser a implementação principal a ser carregada.
+@Primary // Essa vai ser a implementação a ser carregada caso tenha mais de 1.
 public class AuthenticationServiceImpl implements AuthenticationService { // Serviço relacionado a autenticação do usuário no sistema.
 
     private final TokenService tokenService; // injeção de dependencia do TokenService -> gerar o token.
@@ -26,12 +26,13 @@ public class AuthenticationServiceImpl implements AuthenticationService { // Ser
     @Override
     public Token authenticate(LoginDTO loginData) { // Método para fazer o login e se autenticar no sistema.
 
-        UsernamePasswordAuthenticationToken login = loginData.toConvert();   // converter os dados passado pelo usuario em um token de autenticação
+        UsernamePasswordAuthenticationToken login = loginData.toConvert();   // converte os dados passado pelo usuário em um token de autenticação
 
         try {
-            Authentication authentication = authManager.authenticate(login); // autenticar usuário com base nos dados informados por ele
+            Authentication authentication = authManager.authenticate(login); // autentica o usuário com base nos dados informados por ele
 
-            String token = tokenService.generateToken(authentication);   // geração do token, e esse token é devolvido para o controller para ser enviado ao client.
+            String token = tokenService.generateToken(authentication);   // geração do token, e esse token é devolvido para o controller para ser enviado ao client e
+                                                                                                                   // ser usado nas próximas requisições.
 
             return new Token(token, "Bearer");
 

@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class RegisterUserArgs { // Argumentos necessários para poder verificar se um usuário pode ser registrado no banco.
+public class RegisterUserArgs { // Argumentos necessários para poder verificar se um usuário pode ser registrado no sistema.
 
     private RegisterUserDTO registerData; // dados do user passado pelo próprio usuário.
     private UserRepository userRepository; // Será utilizado para fazer ligação com o banco.

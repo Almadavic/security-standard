@@ -21,7 +21,7 @@ import java.util.List;
 
 
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
-@Primary // Essa vai ser a implementação principal a ser carregada.
+@Primary // Essa vai ser a implementação a ser carregada caso tenha mais de 1.
 public class TokenServiceImpl implements TokenService { // Serviço relacionado ao token.
 
     @Value("${jwt.expiration}") // var de ambiente , localização externa - application(test,prod).properties
@@ -68,7 +68,7 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
         return roles.stream().map(String::valueOf).toList();
     }
 
-    private Instant expirationInstant() { // Método que retorna o tempo (QUANDO) o token vai expirar
+    private Instant expirationInstant() { // Método que retorna o tempo (QUANDO) o token vai expirar.
 
         long hours = Long.parseLong(this.expiration);
 

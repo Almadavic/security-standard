@@ -18,17 +18,17 @@ import java.util.List;
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
 @RequiredArgsConstructor
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
-@Primary // Essa vai ser a implementação principal a ser carregada.
+@Primary // Essa vai ser a implementação a ser carregada caso tenha mais de 1.
 public class UserAreaServiceImpl implements UserAreaService { // Serviço relacionado a area do usuário no sistema.
 
     private final UserRepository userRepository; // injeção de dependencia de UserRepository -> salvar, atualizar e buscar um usuário do banco de dados.
 
-    private final PasswordEncoder encoder; //  injeção de dependencia de Encoder - > codificar uma senha para ser salva no banco e para fazer validação (match)
+    private final PasswordEncoder encoder; //  injeção de dependencia de Encoder -> codificar uma senha para ser salva no banco e para fazer validação (match).
 
-    private final List<ChangePasswordVerification> changePasswordVerifications; // List com regras de negocio (verificacão) relacionadas a troca de senha.
+    private final List<ChangePasswordVerification> changePasswordVerifications; // Lista com regras de négocio (verificacão) relacionadas a troca de senha.
 
     @Override
-    public UserDTO myProfile(User userLogged) { // Principal - Usuário logado , método retorna as informações do usuário logado.
+    public UserDTO myProfile(User userLogged) { // Método recebe o usuário logado.
         return new UserDTO(userLogged); // retorna o DTO desse usuário para o client.
     }
 
@@ -39,15 +39,15 @@ public class UserAreaServiceImpl implements UserAreaService { // Serviço relaci
 
         updatePassword(cpDTO, userLogged); // método atualiza a senha do usuário (mais informações na declaração do método).
 
-        userRepository.save(userLogged); // salva o usuário COM A SENHA ALTERADA no banco de dados novamente.
+        userRepository.save(userLogged); // salva o usuário com A SENHA ALTERADA no banco de dados.
 
         return "Password changed successfully!"; // retorna uma mensagem que a alteração de senha foi feita com sucesso
 
     }
 
-    private void updatePassword(ChangePasswordDTO cpDTO, User userLogged) { // Método pega a senha (nova) passado pelo usuário e altera a senha da conta com essa nova senha.
+    private void updatePassword(ChangePasswordDTO cpDTO, User userLogged) { // Método obtem a senha (nova) passada pelo usuário e altera a senha da conta com essa nova senha passada.
 
-        String newPassword = encodePassword(cpDTO.getNewPassword(), encoder); // Codifica a senha , (mais informações na declaração do método).
+        String newPassword = encodePassword(cpDTO.getNewPassword(), encoder); // Codifica a senha.
 
         userLogged.setPassword(newPassword); // Seta a senha codificada no usuário.
 

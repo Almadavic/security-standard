@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 
-public class ValidRoleName extends FindUsersByRoleNameVerification {  // Validação caso o client passa um parametro correto como role para o findall
+public class ValidRoleName extends FindUsersByRoleNameVerification {  // Validação caso o client passa um parametro correto como role para o findAll
 
     public ValidRoleName(FindUsersByRoleNameVerification nextOne) {
         super(nextOne);
@@ -16,21 +16,24 @@ public class ValidRoleName extends FindUsersByRoleNameVerification {  // Valida�
     @Override
     public Page<User> verification(FindUsersArgs args) {
 
-        String roleName = args.getRoleName();
-        Pageable pageable = args.getPageable();
-        UserRepository userRepository = args.getUserRepository();
+        String roleName = args.getRoleName(); // role passada pelo usuário.
+        Pageable pageable = args.getPageable(); // Paginação.
+        UserRepository userRepository = args.getUserRepository(); // repository para retornar a página.
 
-        String roleNamePrefix = "ROLE_" + roleName.toUpperCase();
+        String role = "ROLE_" + roleName.toUpperCase();
 
-        boolean validParameter = roleNamePrefix.equalsIgnoreCase("ROLE_ADMIN") ||
-                roleNamePrefix.equalsIgnoreCase("ROLE_USER");
+        boolean validParameter = validParameter(role);
 
         if (validParameter) { // Se a role estiver certa.
-            return userRepository.findByRole(pageable, roleNamePrefix); // Vai retornar todos os usuários que contém aquela ROLE
+            return userRepository.findByRole(pageable, role); // Vai retornar todos os usuários que contém aquela ROLE
         }
 
-        return nextOne.verification(args); // Caso não aconteça, vai chamar a proxima validação
+        return nextOne.verification(args); // Caso não aconteça, vai chamar a proxima validação (da proxima classe).
 
+    }
+
+    private boolean validParameter (String role) { // Método para verificar se a role passada pelo usuário é válida.
+        return role.equalsIgnoreCase("ROLE_ADMIN") ||  role.equalsIgnoreCase("ROLE_USER");
     }
 
 }

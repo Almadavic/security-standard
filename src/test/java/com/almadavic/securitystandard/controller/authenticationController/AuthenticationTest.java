@@ -16,11 +16,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
-@SpringBootTest // Indica que estamos fazendo testes com spring, onde a aplicação sobe.
+@SpringBootTest // Indica que estamos fazendo testes com spring, onde a aplicação sobe (vai para o ar).
 @AutoConfigureMockMvc // Utilizaremos mocks nos testes
 public class AuthenticationTest extends ClassTestParent {  // Classe testa a autenticação de um usuário no sistema.
 
-    private final String path = "/auth";
+    private final String path = "/auth"; // recurso (URI)
 
     @Test
     void loginFailPasswordWrong() throws Exception { // Login deve falhar pois a senha está incorreta.

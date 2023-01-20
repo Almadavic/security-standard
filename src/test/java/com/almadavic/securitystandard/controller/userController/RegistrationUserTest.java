@@ -25,7 +25,7 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
     @Test
     void nicknameAlreadyRegistered() throws Exception { // Método deve falhar pois já existe um usuário no banco com esse nickname.
 
-        RegisterUserDTO registerDTO = new RegisterUserDTO("admin", "joaomaia@gmail.com", "123456", "123456");
+        RegisterUserDTO registerDTO = new RegisterUserDTO("admin", "joaomaia@gmail.com", "123456", "123456"); // DTO para se registrar no sistema.
 
         mockMvc.perform(post("/users/register")
                         .contentType("application/json")
@@ -40,14 +40,14 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
     @Test
     void emailAlreadyRegistered() throws Exception {  // Método deve falhar pois já existe um usuário no banco com esse e-mail.
 
-        RegisterUserDTO registerDTO = new RegisterUserDTO("almadaV", "admin@hotmail.com", "123456", "123456");
+        RegisterUserDTO registerDTO = new RegisterUserDTO("almadaV", "admin@hotmail.com", "123456", "123456"); // DTO para se registrar no sistema.
 
-        mockMvc.perform(post("/users/register")
-                        .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(registerDTO)))
-                .andExpect(status().is(internalServerError))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof EmailAlreadyRegisteredException))
-                .andExpect(result -> assertEquals("This e-mail: " + registerDTO.getEmail() + " already exists in the system"
+        mockMvc.perform(post("/users/register") // Caminho da requisição.
+                        .contentType("application/json") // // O tipo do conteúdo
+                        .content(objectMapper.writeValueAsString(registerDTO))) // O conteúdo que será enviado.
+                .andExpect(status().is(internalServerError)) // Erro que deve ocorrer.
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof EmailAlreadyRegisteredException)) // Tipo de exception esperada.
+                .andExpect(result -> assertEquals("This e-mail: " + registerDTO.getEmail() + " already exists in the system" // Mensagem da exception esperada.
                         , result.getResolvedException().getMessage()));
 
     }

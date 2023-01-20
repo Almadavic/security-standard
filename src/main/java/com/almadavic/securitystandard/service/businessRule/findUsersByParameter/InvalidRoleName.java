@@ -6,18 +6,18 @@ import com.almadavic.securitystandard.service.customException.InvalidParamExcept
 import org.springframework.data.domain.Page;
 
 
-public class InvalidRoleName extends FindUsersByRoleNameVerification { // Validação caso o client passa um parametro errado como role para o findall
+public class InvalidRoleName extends FindUsersByRoleNameVerification { // Validação caso o client passa um parametro errado como role para o findAll
 
     public InvalidRoleName() {
         super(null);
     }
 
     @Override
-    public Page<User> verification(FindUsersArgs args) {
+    public Page<User> verification(FindUsersArgs args) { // Se chegar até aqui nessa classe, é porque o parametro está inválido.
 
         String roleName = args.getRoleName();
 
-        throw new InvalidParamException("This parameter (role) : { " + roleName + " } is invalid"); // Se chegar até aqui nessa classe, é porque o parametro está inválido
+        throw new InvalidParamException("This parameter (role) : { " + roleName + " } is invalid");
 
     }
 

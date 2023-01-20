@@ -5,6 +5,7 @@ import com.almadavic.securitystandard.config.exceptionConfig.standardError.commo
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.validationArgsStandardError.StandardErrorArgsNotValid;
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.validationArgsStandardError.ValidationErrorCollection;
 import com.almadavic.securitystandard.service.customException.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,16 +24,16 @@ import java.util.List;
 
 
 @ControllerAdvice
-// // Se ocorrer alguma das execções abaixo durante o programa, o Spring vai cair nessa classe e vai retornar o erro  de uma forma mais agradavél pro cliente.
+// Se ocorrer alguma das execções abaixo durante o programa, o Spring vai cair nessa classe e vai retornar o erro de uma forma mais agradável para o cliente.
 @RequiredArgsConstructor
-// Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
+// Faz com que quando a classe for instanciada, os atributos com FINAL vão ser passados no construtor automaticamente.
 public class ResourceExceptionHandler {
 
     private final MessageSource messageSource; // pega a mensagem do erro do validation.
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceExceptionHandler.class); // Para mostrar log no console.
 
-    @ExceptionHandler(value = MethodArgumentNotValidException.class) // Pega os erros de validação, como o @NotBlank
+    @ExceptionHandler(value = MethodArgumentNotValidException.class) // Pega os erros de validação, como o @NotBlank!
     public ResponseEntity<ValidationErrorCollection> handleValidations(MethodArgumentNotValidException exception, HttpServletRequest request) {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -76,7 +77,7 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, error, status);
     }
 
-    @ExceptionHandler(value = DatabaseException.class)  // Algum problema com o banco de dados.
+    @ExceptionHandler(value = DatabaseException.class)  // Algum problema com o banco de dados!
     public ResponseEntity<StandardError> dataBase(DatabaseException exception, HttpServletRequest request) {
         String error = "Database error";
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -84,14 +85,14 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(value = PasswordDoesntMatchRegisterUserException.class)
-    // Quando o usuário passa 2 senhas no cadastro que não se correspondem
+    // Quando o usuário passa 2 senhas no cadastro que não se correspondem!
     public ResponseEntity<StandardError> passwordsDontMatchException(PasswordDoesntMatchRegisterUserException exception, HttpServletRequest request) {
         String error = "Passwords error";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         return handlingException(exception, request, error, status);
     }
 
-    @ExceptionHandler(value = ResourceNotFoundException.class)  // Quando o recurso não é encontrado no banco de dados.
+    @ExceptionHandler(value = ResourceNotFoundException.class)  // Quando o recurso não é encontrado no banco de dados!
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException exception, HttpServletRequest request) {
         String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -99,7 +100,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(value = SamePasswordException.class)
-    // Quando o usuário tenta mudar a senha para igual a passada.
+    // Quando o usuário tenta mudar a senha para igual a passada!
     public ResponseEntity<StandardError> samePassword(SamePasswordException exception, HttpServletRequest request) {
         String error = "Same password";
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -113,7 +114,7 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, error, status);
     }
 
-    private ResponseEntity<StandardError> handlingException(Exception exception, HttpServletRequest request, String error, HttpStatus status) {
+    private ResponseEntity<StandardError> handlingException(Exception exception, HttpServletRequest request, String error, HttpStatus status) { // Método que será reutilizado várias vezes.
         StandardError err = new StandardError(status.value(), error, exception.getMessage(), request.getRequestURI());
         log(exception);
         return ResponseEntity.status(status).body(err);

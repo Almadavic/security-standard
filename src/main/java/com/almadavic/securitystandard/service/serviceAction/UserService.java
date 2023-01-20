@@ -14,6 +14,6 @@ public interface UserService extends UserDetailsService, EncodePassword {  // Se
 
     Page<UserMonitoringDTO> findAll(Pageable pageable, String roleName); // método com a lógica para retornar uma pagina de usuários registrados no sistema.
 
-    UserMonitoringDTO findById(String id); // método com a lógica para retornar um usuário específico do banco pelo id.
+    UserMonitoringDTO findById(String id); // método com a lógica para retornar um usuário específico do sistema pelo id.
 
 }

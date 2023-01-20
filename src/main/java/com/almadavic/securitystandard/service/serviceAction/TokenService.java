@@ -4,7 +4,7 @@ package com.almadavic.securitystandard.service.serviceAction;
 import org.springframework.security.core.Authentication;
 
 
-public interface TokenService {
+public interface TokenService { // Service do Token deve implementar essa interface.
 
     String generateToken(Authentication authentication); // método para gerar o token.
 

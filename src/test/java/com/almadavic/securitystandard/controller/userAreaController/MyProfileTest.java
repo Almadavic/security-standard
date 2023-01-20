@@ -22,18 +22,18 @@ public class MyProfileTest extends ClassTestParent { // Classe testa o recurso /
     @Test
     void myProfileAdmLogged() throws Exception { // Teste deve passar, acessar o recurso com um usuário role = administrador logado.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
 
-        String token = authenticate(loginData);
+        String token = authenticate(loginData); // Loga o usuário no sistema através do DTO e retorna o token pora ser enviado nas próxima requisição.
 
-        mockMvc.perform(get(path)
-                        .header("Authorization", token))
-                .andExpect(status().is(ok));
+        mockMvc.perform(get(path) // Caminho da requisição.
+                        .header("Authorization", token)) // Token que será enviado na requisição.
+                .andExpect(status().is(ok)); // Status de resposta esperado.
 
     }
 
     @Test
-    void myProfileUserLogged() throws Exception { // Teste deve passar, acessar o recurso com um usuário role =user logado.
+    void myProfileUserLogged() throws Exception { // Teste deve passar, acessar o recurso com um usuário role = user logado.
 
         LoginDTO loginData = new LoginDTO("user2@hotmail.com", "123456");
 

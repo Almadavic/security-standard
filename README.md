@@ -108,11 +108,11 @@ Bancos de Dados :
 
 # INFORMAÇÕES ADICIONAIS :
 
-    Linhas de Código : 2184
+    Linhas de Código : 2188
     
     Classes / Arquivos implementados : 81
 
-    Testes : 39
+    Testes : 40
 
 # LINKS ADICIONAIS : 
 

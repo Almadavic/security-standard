@@ -14,21 +14,21 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
 @SpringBootTest
-public class RegistrationUserTest {
+public class RegistrationUserTest {  // Classe que testa o service associado com a funcionalidade de registrar um usuário no sistema.
 
     @Autowired
-    private UserService userService;
+    private UserService userService; // Usado para testar o método de registrar um usuário no sistema.
 
     @Test
     void returnRegisterData() {
 
-        RegisterUserDTO userRequestDTO = new RegisterUserDTO("paulo", "paulo@hotmail.com", "1234567", "1234567");
+        RegisterUserDTO userRequestDTO = new RegisterUserDTO("paulo", "paulo@hotmail.com", "1234567", "1234567");  // DTO de registro de usuário.
 
-        UserMonitoringDTO userResponseDTO = userService.register(userRequestDTO);
+        UserMonitoringDTO userResponseDTO = userService.register(userRequestDTO); // O método recebe um DTO de registro e retorna um DTO de usuário.
 
-        Assertions.assertEquals(userRequestDTO.getNickname(), userResponseDTO.getNickname());
-        Assertions.assertEquals(userRequestDTO.getEmail(), userResponseDTO.getEmail());
-        Assertions.assertEquals(userResponseDTO.getRolesDTO().get(0).getRoleName(), RoleName.ROLE_USER.name());
+        Assertions.assertEquals(userRequestDTO.getNickname(), userResponseDTO.getNickname());  // O nome do DTO tem que ser o mesmo do usuário no banco.
+        Assertions.assertEquals(userRequestDTO.getEmail(), userResponseDTO.getEmail());  // O email do DTO tem que ser o mesmo do usuário no banco.
+        Assertions.assertEquals(userResponseDTO.getRolesDTO().get(0).getRoleName(), RoleName.ROLE_USER.name()); // A role do usuário cadastrado, tem que ser a role = USER.
 
     }
 

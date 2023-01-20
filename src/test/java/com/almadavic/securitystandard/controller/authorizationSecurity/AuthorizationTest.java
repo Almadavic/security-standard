@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,18 +23,18 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
     // ---------------------- | TESTES DE ACESSO NEGADO | --------------------------||
 
     @Test
-    void accessMyProfileDeniedNoUserLogged() throws Exception { // Método testa o acesso ao recurso /userarea/myprofile sem nenhum usuário logado.O sistema não deve deixar
+    void accessMyProfileDeniedNoUserLogged() throws Exception { // Método testa o acesso ao recurso /userarea/myprofile sem nenhum usuário logado.O sistema não deve deixar.
 
         // Método não tem nenhum usuário logado.
         // Qualquer usuário logado tem acesso á esse método.
 
-        mockMvc.perform(get("/userarea/myprofile"))
-                .andExpect(status().is(unauthorized));
+        mockMvc.perform(get("/userarea/myprofile")) // Tentativa de acessar esse recurso
+                .andExpect(status().is(unauthorized)); // É para retornar o status de não autorizado.
 
     }
 
     @Test
-    void accessChangePasswordDeniedNoUserLogged() throws Exception { // Método teste o acesso ao recurso /userarea/changepassword sem nenhum uuário logado.O sistema não deve deixar
+    void accessChangePasswordDeniedNoUserLogged() throws Exception { // Método testa o acesso ao recurso /userarea/changepassword sem nenhum uuário logado.O sistema não deve deixar.
 
         // Método não tem nenhum usuário logado.
         // Qualquer usuário logado tem acesso á esse método.
@@ -44,7 +45,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
     }
 
     @Test
-    void accessFindAllDeniedNoUserLogged() throws Exception { // Método teste o acesso ao recurso /users/findall sem nenhum usuário logado. O sistema não deve deixar.
+    void accessFindAllDeniedNoUserLogged() throws Exception { // Método testa o acesso ao recurso /users/findall sem nenhum usuário logado. O sistema não deve deixar.
 
         // Método não tem nenhum usuário logado.
         // Apenas administradores podem acessar esse recurso.
@@ -55,19 +56,19 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
     }
 
     @Test
-        // Método testa o acesso ao recurso /users/findall com usuário role= user logado. Sistema não deve deixar.
+        // Método testa o acesso ao recurso /users/findall com usuário role = user logado. Sistema não deve deixar.
     void accessFindAllDeniedRoleUserLogged() throws Exception {
 
         // Método tem usuário logado.
         // Apenas administradores podem acessar esse recurso.
 
-        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
+        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
 
-        String token = authenticate(loginData);
+        String token = authenticate(loginData); // Loga o usuário no sistema apartir do DTO e retorna o token pora ser enviado nas próxima requisição.
 
-        mockMvc.perform(get("/users")
-                        .header("Authorization", token))
-                .andExpect(status().is(forbidden));
+        mockMvc.perform(get("/users") // Tentativa de acessar esse recurso
+                        .header("Authorization", token)) // É enviado um token na requisição.
+                .andExpect(status().is(forbidden)); // É para retornar o status de proibido.
 
     }
 
@@ -78,7 +79,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
         // Apenas administradores podem acessar esse recurso.
 
         mockMvc.perform(get("/users/{id}", "teste")) // Não tem nenhuma variavel para id, mas oq importa é dar o erro unhautorizen.
-                .andExpect(status().is(unauthorized));
+                .andExpect(status().is(unauthorized)); // É para retornar o status de não autorizado.
 
     }
 
@@ -109,42 +110,20 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
 
     }
 
-    @Test
-    void accessAnyOtherResourcedDeniedRoleAdminLogged() throws Exception { // Método testa o acesso a algum recurso inválido no sistema, usuário role=administrador logado. O sistema não deve deixar.
-
-        // Ninguém pode acessar esse recurso.
-
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
-
-        String token = authenticate(loginData);
-
-
-        mockMvc.perform(get("/recursoinvalido")
-                        .header("Authorization", token))
-                .andExpect(status().is(notFound));
-
-    }
-
-    @Test
-    void accessAnyOtherResourcedDeniedRoleUserLogged() throws Exception { // Método testa o acesso a algum recurso inválido no sistema, usuário role=user logado. O sistema não deve deixar.
-
-        // Ninguém pode acessar esse recurso.
-
-        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
-
-        String token = authenticate(loginData);
-
-        mockMvc.perform(get("/recursoinvalido")
-                        .header("Authorization", token))
-                .andExpect(status().is(notFound));
-
-    }
-
-
     // ---------------------- | TESTES DE ACESSO LIBERADO | --------------------------||
 
     @Test
-    void accessAuthentication() throws Exception { // Método testa o acesso au recurso /auth. O sistema deve deixar.
+    void accessSwagger() throws Exception { // Método testa o acesso ao recurso /swagger-ui/index.html. O sistema deve deixar.
+
+        // Método não precisa de autenticação e nema autorização.
+
+        mockMvc.perform(get("/swagger-ui/index.html"))
+                .andExpect(result -> assertEquals(ok, result.getResponse().getStatus())); // Tem que retornar esse status,  é o único status que deve ser retornado desse recurso.
+
+    }
+
+    @Test
+    void accessAuthentication() throws Exception { // Método testa o acesso ao recurso /auth. O sistema deve deixar.
 
         // Método não tem nenhum usuário logado.
         // Qualquer um pode acessar esse recurso.
@@ -160,7 +139,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
         // Método tem administrador logado.
         // Qualquer um pode (logado) pode acessar esse método.
 
-        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -169,6 +148,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
 
     }
 
@@ -225,7 +205,7 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
     }
 
     @Test
-    void accessRegisterUser() throws Exception { // Método testa o acesso au recurso /auth. O sistema deve deixar.
+    void accessRegisterUser() throws Exception { // Método testa o acesso ao recurso /auth. O sistema deve deixar.
 
 
         // Método não tem nenhum usuário logado.
@@ -268,6 +248,35 @@ public class AuthorizationTest extends ClassTestParent { // Classe testa o acess
                         .header("Authorization", token))
                 .andExpect(result -> assertNotEquals(unauthorized, result.getResponse().getStatus()))
                 .andExpect(result -> assertNotEquals(forbidden, result.getResponse().getStatus()));
+
+    }
+
+    @Test
+    void accessAnyOtherResourcedRoleAdminLogged() throws Exception { // Método testa o acesso a algum recurso inválido no sistema, usuário role=administrador logado. Deve retornar status not found.
+
+
+        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+
+        String token = authenticate(loginData);
+
+
+        mockMvc.perform(get("/recursoinvalido")
+                        .header("Authorization", token))
+                .andExpect(status().is(notFound));
+
+    }
+
+    @Test
+    void accessAnyOtherResourceRoleUserLogged() throws Exception { // Método testa o acesso a algum recurso inválido no sistema, usuário role=user logado. Deve retornar status not faund
+
+
+        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
+
+        String token = authenticate(loginData);
+
+        mockMvc.perform(get("/recursoinvalido")
+                        .header("Authorization", token))
+                .andExpect(status().is(notFound));
 
     }
 

@@ -20,7 +20,7 @@ import java.util.List;
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
 @Configuration // Indica que é uma classe de configuração
 @Profile(value = {"test"}) // Define em quais ambientes (profiles) essa classe será "chamada"
-public class StartProjectConfigurations implements CommandLineRunner { // Essa classe é uma clase separada de configuração, Ela serve para popular o banco de dados (NO CASO)!
+public class StartProjectConfigurations implements CommandLineRunner { // Essa classe é uma clase separada de configuração, Ela serve para popular o banco de dados quando a aplicação sobe (NO CASO)!
 
     private final UserRepository userRepository; // Repositório da entidade Usuário
 
@@ -29,48 +29,47 @@ public class StartProjectConfigurations implements CommandLineRunner { // Essa c
     private final PasswordEncoder encoder;  // Encoder para codificar a senha
 
     @Override
-    public void run(String... args) { // Esse método fala que toda vez que o programa iniciar(aplicação for pro ar) em ambiente de DEV E TEST,
-        // essa classe será chamada, consequentemente esse método.
+    public void run(String... args) {  // Objetivo método -> Ele serve para popular o banco de dados e testar se os relacionamentos estão corretos. Sempre que a aplicação
+        // subir e estiver no Profile informado, esse método irá ser chamado.
 
-        // Objetivo método -> Ele serve para popular o banco de dados e testar se os relacionamentos estão corretos.
 
-        User u1 = User.builder()
+        User u1 = User.builder()  // Criando um usuário através de um Builder.
                 .nickname("admin")
                 .email("admin@hotmail.com")
                 .password(encoder.encode("123456"))
                 .build();
 
-        User u2 = User.builder()
+        User u2 = User.builder() // Criando um usuário através de um Builder.
                 .nickname("user1")
                 .email("user1@hotmail.com")
                 .password(encoder.encode("123456"))
                 .build();
 
-        User u3 = User.builder()
+        User u3 = User.builder() // Criando um usuário através de um Builder.
                 .nickname("user2")
                 .email("user2@hotmail.com")
                 .password(encoder.encode("123456"))
                 .build();
 
-        List<User> users = userRepository.saveAll(Arrays.asList(u1, u2, u3));
+        List<User> users = userRepository.saveAll(Arrays.asList(u1, u2, u3)); // Salvando uma lista dos usuários no banco.
 
-        Role r1 = Role.builder()
+        Role r1 = Role.builder() // Criando uma role através de um Builder.
                 .name(RoleName.ROLE_ADMIN)
                 .build();
 
         Role r2 = Role.builder()
-                .name(RoleName.ROLE_USER)
+                .name(RoleName.ROLE_USER) // Criando uma role através de um Builder.
                 .build();
 
-        roleRepository.saveAll(Arrays.asList(r1, r2));
+        roleRepository.saveAll(Arrays.asList(r1, r2));  // Salvando uma lista das roles no banco.
 
-        users.get(0).addRole(r1);
-        users.get(1).addRole(r2);
-        users.get(2).addRole(r2);
+        users.get(0).addRole(r1); // Relacionando as entidades.
+        users.get(1).addRole(r2); // Relacionando as entidades.
+        users.get(2).addRole(r2); // Relacionando as entidades.
 
-        users = userRepository.saveAll(users);
+        users = userRepository.saveAll(users); // Salvando a lista de usuários novamente no banco depois do relacionamento.
 
-        System.out.println(users);
+        System.out.println(users); // Printando.
 
     }
 

@@ -12,6 +12,6 @@ public abstract class FindUsersByRoleNameVerification { // Design Patterns - Cha
 
     protected FindUsersByRoleNameVerification nextOne;
 
-    public abstract Page<User> verification(FindUsersArgs args);
+    public abstract Page<User> verification(FindUsersArgs args); // Método de verificação que as classes vão herdar.
 
 }

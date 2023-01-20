@@ -29,22 +29,22 @@ import java.util.List;
 @Service // Indica que é uma camada de serviço , o spring vai gerenciar automaticamente.
 @RequiredArgsConstructor
 // Faz com que quando a classe for instanciada, os atributos vão ser passados no construtor automaticamente.
-@Primary // Essa vai ser a implementação principal a ser carregada.
+@Primary // Essa vai ser a implementação a ser carregada caso tenha mais de 1.
 public class UserServiceImpl implements UserService { // Serviço relacionado ao User como uma especie de CRUD.
 
     private final UserRepository userRepository; // Injeção de dependencia do UserRepository
 
-    private final RoleRepository roleRepository; // injeção de dependencia de RoleRepository - > buscar uma role do banco de dados.
+    private final RoleRepository roleRepository; // injeção de dependencia de RoleRepository -> buscar uma role do banco de dados.
 
-    private final PasswordEncoder encoder; // injeção de dependencia de Encoder - > codificar uma senha para ser salva no banco e para fazer validação (match)
+    private final PasswordEncoder encoder; // injeção de dependencia de Encoder -> Codificar uma senha para ser salva no banco e para fazer validação (match).
 
-    private final List<RegisterUserVerification> registerUserVerifications; // List com regras de  negocio (verificação) relacinadas ao registro de Usuário.
+    private final List<RegisterUserVerification> registerUserVerifications; // Lista com regras de négocio (verificação) relacinadas ao registro de Usuário.
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // Método que mostra pro spring security como será feita a autenticação.
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // Método que mostra para o spring security como será feita a autenticação.
 
-        User user = userRepository.findByEmail(username)
+        User user = userRepository.findByEmail(username) // A autenticação será feita através do e-mail.
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with this e-mail : " + username));
 
         return user;
@@ -54,9 +54,9 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
     @CacheEvict(value = "usersList", allEntries = true)
     public UserMonitoringDTO register(RegisterUserDTO registerData) { // Método para registrar um usuário no banco.
 
-        registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData, userRepository))); // verificações se os dados informados estão válidos para cadastro.
+        registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData, userRepository))); // verificações se os dados informados estão válidos para o cadastro.
 
-        User user = convertObjectFromDTOToEntity(registerData); // método cria um user. ( mais informações na declaração do método).
+        User user = convertObjectFromDTOToEntity(registerData); // método cria um user. (mais informações na declaração do método).
 
         user = userRepository.save(user); // salva o usuário no banco.
 
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
     private Role returnRole(RoleName name) {  // Método retorna uma role do banco de dados passando o nome dessa role como parametro
 
         return roleRepository.findByName(name).orElseThrow(() ->
-                new ResourceNotFoundException("The role : " + name + " wasn't found in database")); // Método retorna essa role, caso a role não exista, lança, exception.
+                new ResourceNotFoundException("The role : " + name + " wasn't found in database")); // Método retorna essa role, caso a role não exista, lança exception.
 
     }
 

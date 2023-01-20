@@ -22,19 +22,19 @@ public class ValidationErrorCollection implements Serializable { // Classe que s
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = "GMT-3")
     // Formatação da data no JSON
     @JsonProperty(value = "timestamp") // -> nome do campo no JSON
-    private final Instant timestamp;
+    private final Instant timestamp; // -> Tempo em que o erro ocorreu.
 
     @JsonProperty(value = "status") // -> nome do campo no JSON
-    private final Integer status;
-
-    @JsonProperty(value = "path") // -> nome do campo no JSON
-    private final String path;
+    private final Integer status;  // -> Status HTTP
 
     @JsonProperty(value = "error") // -> nome do campo no JSON
-    private final String error;
+    private final String error;  // -> Erro
+
+    @JsonProperty(value = "path") // -> nome do campo no JSON
+    private final String path; // -> URI da requisição
 
     @JsonProperty(value = "validationErrorList") // -> nome do campo no JSON
-    private final List<StandardErrorArgsNotValid> validationErrorList = new ArrayList<>();
+    private final List<StandardErrorArgsNotValid> validationErrorList = new ArrayList<>(); // -> Lista com erros de validação
 
     public ValidationErrorCollection(Integer status, String path, String error) {
         this.timestamp = Instant.now();
@@ -43,7 +43,7 @@ public class ValidationErrorCollection implements Serializable { // Classe que s
         this.error = error;
     }
 
-    public void addStandardErrorArgsNotValid(StandardErrorArgsNotValid standard) {
+    public void addStandardErrorArgsNotValid(StandardErrorArgsNotValid standard) { // Método para adicionar um erro de validação á lista.
         validationErrorList.add(standard);
     }
 

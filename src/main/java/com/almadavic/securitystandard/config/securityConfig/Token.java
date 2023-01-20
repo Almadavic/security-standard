@@ -11,12 +11,12 @@ import lombok.Getter;
 @Getter
 @JsonPropertyOrder(value = {"token", "type"}) // Estou garantindo a ordem dos atributos no JSON.
 public class Token { // Essa classe tem como objetivo retornar para o client o token(que armazena os dados do user "logado")
-    // e o type pro usuário quando ele se autentica.
+    // e o type quando o usuário se autentica.
 
     @JsonProperty(value = "token")  // Dando nome para o atributo no JSON
-    private String token;
+    private String token; // o token (hash)
 
     @JsonProperty(value = "type")  // Dando nome para o atributo no JSON
-    private String type;
+    private String type; // tipo do token
 
 }

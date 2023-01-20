@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 @AllArgsConstructor //Usado na parte de TESTES -> Para instanciar um DTO!
 @Getter
-// A classe não precisa de setter nem construtor personalisado, pois o spring já injeta os dados do Json. Foi criada essa linha por causa dos testes.
 public class LoginDTO { //  DTO que representa o Login do usuário, email e senha!
 
     @NotBlank // --> Campo obrigatorio!
@@ -20,7 +19,7 @@ public class LoginDTO { //  DTO que representa o Login do usuário, email e senh
     @NotBlank // --> Campo obrigatorio!
     private String password; // senha do usuário
 
-    public UsernamePasswordAuthenticationToken toConvert() {
+    public UsernamePasswordAuthenticationToken toConvert() {   // Converter esses dados informados pelo usuário em um token.
         return new UsernamePasswordAuthenticationToken(email, password);
     }
 

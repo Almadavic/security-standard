@@ -10,10 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @AllArgsConstructor
 @Getter
-public class ChangePasswordArgs {
+public class ChangePasswordArgs { // Argumentos necessários para poder trocar a senha no sistema.
 
-    private ChangePasswordDTO cpDTO;
-    private User user;
-    private PasswordEncoder encoder;
+    private ChangePasswordDTO cpDTO; // Senha antiga e nova.
+    private User user; // Usuário logado.
+    private PasswordEncoder encoder; // Codificador de senha.
 
 }

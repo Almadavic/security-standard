@@ -28,19 +28,19 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
     @Test
     void passwordDoenstMatchDataBasePassword() throws Exception { // Alteração de senha deve falhar pois o usuário está passando sua senha incorreta.
 
-        LoginDTO loginData = new LoginDTO("user2@hotmail.com", "123456");
+        LoginDTO loginData = new LoginDTO("user2@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
 
-        String token = authenticate(loginData);
+        String token = authenticate(loginData); // Loga o usuário no sistema através do DTO e retorna o token pora ser enviado nas próxima requisição.
 
-        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO("12345678", "13553353553");
+        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO("12345678", "13553353553"); // DTO para alterar a senha
 
-        mockMvc.perform(put(path)
-                        .contentType("application/json")
-                        .header("Authorization", token)
-                        .content(objectMapper.writeValueAsString(changePasswordDTO)))
-                .andExpect(status().is(badRequest))
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof DatabaseException))
-                .andExpect(result -> assertEquals("The password is not correct (not match)"
+        mockMvc.perform(put(path) // Caminho da requisição
+                        .contentType("application/json") // O tipo do conteúdo
+                        .header("Authorization", token) // O token que será enviado na requisição.
+                        .content(objectMapper.writeValueAsString(changePasswordDTO))) // O conteúdo que será enviado.
+                .andExpect(status().is(badRequest)) // Erro que deve ocorrer.
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof DatabaseException)) // Tipo de exception esperada.
+                .andExpect(result -> assertEquals("The password is not correct (not match)" // Mensagem da exception esperada.
                         , result.getResolvedException().getMessage()));
 
     }
@@ -90,7 +90,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
 
     }
 
-    private void passwordChanged(ChangePasswordDTO changePasswordDTO, String token) throws Exception {
+    private void passwordChanged(ChangePasswordDTO changePasswordDTO, String token) throws Exception { // Mudança de senha.
 
         mockMvc.perform(put(path)
                         .contentType("application/json")
@@ -101,7 +101,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
                         result.getResponse().getContentAsString()));
     }
 
-    private void enterSystemFail(LoginDTO loginDataAttempt1) throws Exception {
+    private void enterSystemFail(LoginDTO loginDataAttempt1) throws Exception { // Usuário tenta logar com a senha antiga.
 
         mockMvc.perform(post("/auth")
                         .contentType("application/json")
@@ -112,7 +112,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
                         , result.getResolvedException().getMessage()));
     }
 
-    private void enterSystemSuccess(LoginDTO loginDataAttempt2) throws Exception {
+    private void enterSystemSuccess(LoginDTO loginDataAttempt2) throws Exception { // Usuário tenta logar com a nova senha.
 
         mockMvc.perform(post("/auth")
                         .contentType("application/json")
