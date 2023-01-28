@@ -102,7 +102,7 @@ Bancos de Dados :
 
     Linhas de Código: 2186
     
-    Classes / Arquivos implementados: 2204
+    Classes / Arquivos implementados: 80
 
     Testes: 40
 
