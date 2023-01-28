@@ -2,12 +2,6 @@
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Almadavic/security-standard/blob/main/LICENSE)
 
-
-#### Encontre o projeto online:
-
-#### Documentação do projeto no Swagger:
-
-
  # SOBRE O QUE É A APLICAÇÃO :
 
 Essa é uma aplicação para ser o esqueleto (base) de outras API's futuras que necessitam de autenticação JWT e autorização. Além desses
@@ -37,27 +31,27 @@ independente da API. Isso é uma coisa que cansa muito e acaba tomando muito tem
 
   - O Usuário se registra no sistema.
   - O Usuário se autentica  no sistema.
-  - O Usuário pode entrar no seu perfil  (ver as informações de sua conta).
+  - O Usuário pode entrar no seu perfil (ver as informações de sua conta).
   - O Usuário pode mudar a sua senha.
   - O Administrador pode ver uma página de usuários cadastrados no sistema.
   - O Administrador pode ver qualquer usuário registrado no sistema em específico pelo id.
 
 # VERSIONAMENTO :
 
-Versão do Java : 17
+Versão do Java: 17
 
-Versão do Spring Boot : 3.0.1
+Versão do Spring Boot: 3.0.1
 
 # FERRAMENTAS :
 
-Back end :
+Back end:
 
       - Java
       - Spring Boot c/ Spring Security e JWT.
       - JPA / Hibernate
       - Maven
 
-Dependências :
+Dependências:
 
      Data JPA - > Utilizando o JPA para fazer a ponte entre o banco de dados e a aplicação -> ORM
      
@@ -93,8 +87,6 @@ Programas Utilizados :
 
     JWT.IO - Depurar o token e ver o seu formato.
 
-    Heroku - Colocar a aplicação na nuvem, sendo acessível por usuários de qualquer lugar.
-
 Bancos de Dados :
 
     PostgreSQL - Usado em ambiente de desenvolvimento e produção.
@@ -108,11 +100,13 @@ Bancos de Dados :
 
 # INFORMAÇÕES ADICIONAIS :
 
-    Linhas de Código : 2188
+    Linhas de Código: 2186
     
-    Classes / Arquivos implementados : 81
+    Classes / Arquivos implementados: 2204
 
-    Testes : 40
+    Testes: 40
+
+    Link index do Swagger: /security-api/swagger-ui/index.html
 
 # LINKS ADICIONAIS : 
 

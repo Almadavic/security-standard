@@ -5,6 +5,7 @@ import com.almadavic.securitystandard.config.exceptionConfig.standardError.commo
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.validationArgsStandardError.StandardErrorArgsNotValid;
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.validationArgsStandardError.ValidationErrorCollection;
 import com.almadavic.securitystandard.service.customException.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.List;
 
@@ -52,65 +54,55 @@ public class ResourceExceptionHandler {
 
     }
 
+    @ExceptionHandler({EntityNotFoundException.class, NoHandlerFoundException.class})
+    // Quando há a tentativa de acessar algum recurso inválido quando o usuário está logado.
+    public ResponseEntity<StandardError> mappingNotFound(HttpServletRequest request) {
+        return handlingException(new ResourceNotFoundException("The resource isn't mapped"),request,"Not found", HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = PropertyReferenceException.class)
     // Quando passa uma referencia de propriedade incorreta, pelo client!
     public ResponseEntity<StandardError> propertyReference(PropertyReferenceException exception, HttpServletRequest request) {
-        String error = "Property Reference error";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Property Reference error", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = EmailAlreadyRegisteredException.class)
     // Quando tenta cadastrar um usuário com um email q já exista no banco!
     public ResponseEntity<StandardError> emailAlreadyRegistered(EmailAlreadyRegisteredException exception, HttpServletRequest request) {
-        String error = "Email error";
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Email error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = NicknameAlreadyRegisteredException.class)
     // Quando tenta cadastrar um usuário com um nickname q já existe no banco!
     public ResponseEntity<StandardError> nicknameAlreadyRegistered(NicknameAlreadyRegisteredException exception, HttpServletRequest request) {
-        String error = "Username error";
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Username error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = DatabaseException.class)  // Algum problema com o banco de dados!
     public ResponseEntity<StandardError> dataBase(DatabaseException exception, HttpServletRequest request) {
-        String error = "Database error";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Database error", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = PasswordDoesntMatchRegisterUserException.class)
     // Quando o usuário passa 2 senhas no cadastro que não se correspondem!
     public ResponseEntity<StandardError> passwordsDontMatchException(PasswordDoesntMatchRegisterUserException exception, HttpServletRequest request) {
-        String error = "Passwords error";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Passwords error", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)  // Quando o recurso não é encontrado no banco de dados!
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException exception, HttpServletRequest request) {
-        String error = "Resource not found";
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Resource not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = SamePasswordException.class)
     // Quando o usuário tenta mudar a senha para igual a passada!
     public ResponseEntity<StandardError> samePassword(SamePasswordException exception, HttpServletRequest request) {
-        String error = "Same password";
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Same password", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(InvalidParamException.class) // Quando o usuário passa algum parametro errado!
     public ResponseEntity<StandardError> invalidParam(InvalidParamException exception, HttpServletRequest request) {
-        String error = "Invalid Param";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        return handlingException(exception, request, error, status);
+        return handlingException(exception, request, "Invalid Param", HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<StandardError> handlingException(Exception exception, HttpServletRequest request, String error, HttpStatus status) { // Método que será reutilizado várias vezes.

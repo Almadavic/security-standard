@@ -72,10 +72,9 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
 
         long hours = Long.parseLong(this.expiration);
 
-        Instant expiration = LocalDateTime.now().plusHours(hours)
+        return LocalDateTime.now().plusHours(hours)
                 .toInstant(ZoneOffset.of("-03:00"));
 
-        return expiration;
     }
 
     private Algorithm secretAlgorithm () { // Algoritmo de codificação.

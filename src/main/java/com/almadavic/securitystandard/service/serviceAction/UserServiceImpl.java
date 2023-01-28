@@ -44,10 +44,9 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // Método que mostra para o spring security como será feita a autenticação.
 
-        User user = userRepository.findByEmail(username) // A autenticação será feita através do e-mail.
+        return userRepository.findByEmail(username) // A autenticação será feita através do e-mail.
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with this e-mail : " + username));
 
-        return user;
     }
 
     @Override
@@ -69,9 +68,8 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
 
         Page<User> users = verifyParametersToReturnCorrectPage(pageable, roleName);
 
-        Page<UserMonitoringDTO> usersDTO = convertPageFromEntityToDTO(users); // Método retorna uma página de UsersDTO (mais informações na declaração do método)
+        return convertPageFromEntityToDTO(users); // Método retorna uma página de UsersDTO (mais informações na declaração do método) e a lista é retornada pro controller.
 
-        return usersDTO; // essa lista é retornada pro controller.
     }
 
     @Override
@@ -109,9 +107,8 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
                 new ValidRoleName( // Verifica se o parametro é válido
                         new InvalidRoleName())); // Se nada do que for acima for correto, o roleName é inválido.
 
-        Page<User> users = verification.verification(new FindUsersArgs(userRepository, pageable, roleName)); // Retorna a página correta.
+        return verification.verification(new FindUsersArgs(userRepository, pageable, roleName)); // Retorna a página correta.
 
-        return users;
     }
 
     private Page<UserMonitoringDTO> convertPageFromEntityToDTO(Page<User> users) { // Método converte uma página de usuários (entidade) para uma página de usuários DTO.
