@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ public class StartProjectConfigurations implements CommandLineRunner { // Essa c
     private final RoleRepository roleRepository; // Repositório da entidade Role
 
     private final PasswordEncoder encoder;  // Encoder para codificar a senha
+
 
     @Override
     public void run(String... args) {  // Objetivo método -> Ele serve para popular o banco de dados e testar se os relacionamentos estão corretos. Sempre que a aplicação

@@ -22,12 +22,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc // Utilizaremos mocks nos testes
 public class RegistrationUserTest extends ClassTestParent {  // Classe testa a funcionalidade de cadastrar um usuário no banco.
 
+    private final String path = "/users/register";
+
     @Test
     void nicknameAlreadyRegistered() throws Exception { // Método deve falhar pois já existe um usuário no banco com esse nickname.
 
         RegisterUserDTO registerDTO = new RegisterUserDTO("admin", "joaomaia@gmail.com", "123456", "123456"); // DTO para se registrar no sistema.
 
-        mockMvc.perform(post("/users/register")
+        mockMvc.perform(post(path)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(registerDTO)))
                 .andExpect(status().is(internalServerError))
@@ -42,7 +44,7 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
 
         RegisterUserDTO registerDTO = new RegisterUserDTO("almadaV", "admin@hotmail.com", "123456", "123456"); // DTO para se registrar no sistema.
 
-        mockMvc.perform(post("/users/register") // Caminho da requisição.
+        mockMvc.perform(post(path) // Caminho da requisição.
                         .contentType("application/json") // // O tipo do conteúdo
                         .content(objectMapper.writeValueAsString(registerDTO))) // O conteúdo que será enviado.
                 .andExpect(status().is(internalServerError)) // Erro que deve ocorrer.
@@ -57,7 +59,7 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
 
         RegisterUserDTO registerDTO = new RegisterUserDTO("Larissa", "larissa@hotmail.com", "123456", "1234567");
 
-        mockMvc.perform(post("/users/register")
+        mockMvc.perform(post(path)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(registerDTO)))
                 .andExpect(status().is(badRequest))
@@ -72,7 +74,7 @@ public class RegistrationUserTest extends ClassTestParent {  // Classe testa a f
 
         RegisterUserDTO registerDTO = new RegisterUserDTO("Davi", "davi@hotmail.com", "123456", "123456");
 
-        mockMvc.perform(post("/users/register")
+        mockMvc.perform(post(path)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(registerDTO)))
                 .andExpect(status().is(created))

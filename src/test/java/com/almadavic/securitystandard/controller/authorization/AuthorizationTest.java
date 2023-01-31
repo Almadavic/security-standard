@@ -1,4 +1,4 @@
-package com.almadavic.securitystandard.controller.authorizationSecurity;
+package com.almadavic.securitystandard.controller.authorization;
 
 
 import com.almadavic.securitystandard.controller.ClassTestParent;

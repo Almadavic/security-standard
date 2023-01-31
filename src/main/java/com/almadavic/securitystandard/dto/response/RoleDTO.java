@@ -18,4 +18,9 @@ public class RoleDTO { // DTO que será retornado pro client, representa as role
         this.roleName = role.getAuthority();
     }
 
+    @Override
+    public String toString() {
+        return roleName;
+    }
+
 }

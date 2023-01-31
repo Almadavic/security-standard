@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class AuthorizationAuthenticationHandler { // Essa classe será utilizada por 2 classes handles, a classe atual tem o papel de retornar a
+public abstract class AuthorizationAuthenticationHandler { // Essa classe será utilizada por 2 classes handles, a classe atual tem o papel de retornar a
     //resposta para o cliente. Essa resposta será enviada dependendo em qual handler for chamado ( em 1 classe retorna a mensagem de um jeito, na outra,
     // de outro jeito. Forbidden ou Unauthorized.
 
