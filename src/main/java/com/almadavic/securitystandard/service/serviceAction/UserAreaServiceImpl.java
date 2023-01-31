@@ -47,7 +47,7 @@ public class UserAreaServiceImpl implements UserAreaService { // Serviço relaci
 
     private void updatePassword(ChangePasswordDTO cpDTO, User userLogged) { // Método obtem a senha (nova) passada pelo usuário e altera a senha da conta com essa nova senha passada.
 
-        String newPassword = encodePassword(cpDTO.getNewPassword(), encoder); // Codifica a senha.
+        String newPassword = encoder.encode(cpDTO.getNewPassword()); // Codifica a senha.
 
         userLogged.setPassword(newPassword); // Seta a senha codificada no usuário.
 

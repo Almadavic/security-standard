@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
         User user = User.builder()
                 .nickname(registerData.getNickname())
                 .email(registerData.getEmail())
-                .password(encodePassword(registerData.getPassword(), encoder)) // encoder --> codifica a senha ( mais informações na declaração do método).
+                .password(encoder.encode(registerData.getPassword())) // encoder --> codifica a senha ( mais informações na declaração do método).
                 .build();             // -> Utilizado um builder na contrução do objeto pois é mais légivel e evita passar parametros errados.
 
         Role role = returnRole(RoleName.ROLE_USER); // Método retorna uma role ( mais informações na declaração do método).
