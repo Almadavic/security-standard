@@ -105,6 +105,11 @@ public class ResourceExceptionHandler {
         return handlingException(exception, request, "Invalid Param", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(RuntimeException.class) // Quando ocorre alguma exception generica em momento de execução!
+    public ResponseEntity<StandardError> genericException(RuntimeException exception, HttpServletRequest request) {
+        return handlingException(exception, request, "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private ResponseEntity<StandardError> handlingException(Exception exception, HttpServletRequest request, String error, HttpStatus status) { // Método que será reutilizado várias vezes.
         StandardError err = new StandardError(status.value(), error, exception.getMessage(), request.getRequestURI());
         log(exception);

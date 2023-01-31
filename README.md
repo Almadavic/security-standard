@@ -100,9 +100,9 @@ Bancos de Dados :
 
 # INFORMAÇÕES ADICIONAIS :
 
-    Linhas de Código: 2186
+    Linhas de Código: 2204
     
-    Classes / Arquivos implementados: 80
+    Classes / Arquivos implementados: 77
 
     Testes: 40
 

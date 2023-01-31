@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService { // Serviço relacionado ao
 
     private final List<RegisterUserVerification> registerUserVerifications; // Lista com regras de négocio (verificação) relacinadas ao registro de Usuário.
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // Método que mostra para o spring security como será feita a autenticação.
 
