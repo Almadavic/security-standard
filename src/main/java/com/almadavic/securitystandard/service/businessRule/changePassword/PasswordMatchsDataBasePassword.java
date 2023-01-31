@@ -23,14 +23,10 @@ public class PasswordMatchsDataBasePassword implements ChangePasswordVerificatio
         PasswordEncoder encoder = args.getEncoder(); // Verificará se as senhas combinam.
 
 
-        if (!check(passwordDTO, passwordDataBase, encoder)) {
+        if (!encoder.matches(passwordDTO,passwordDataBase)) { // Verifica se as senhas são iguais.
             throw new DatabaseException("The password is not correct (not match)"); // Se for diferente, lança a exception
         }
 
     }
-
-    private boolean check(String passwordDTO, String passwordUser, PasswordEncoder encoder) { // Método para checar se as senhas são iguais.
-        return encoder.matches(passwordDTO, passwordUser);
-    }
-
+    
 }
