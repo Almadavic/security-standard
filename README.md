@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Almadavic/security-standard/blob/main/LICENSE)
 
- # SOBRE O QUE É A APLICAÇÃO :
+ # O QUE É A APLICAÇÃO :
 
 Essa é uma aplicação para ser o esqueleto (base) de outras API's futuras que necessitam de autenticação JWT e autorização. Além desses
 2 recursos, a API conta com outras diversas configurações padrões que podem ser aproveitadas em uma futura API, como:

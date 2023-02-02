@@ -59,7 +59,7 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
                     .build()
                     .verify(token)
                     .getSubject();
-        } catch (JWTVerificationException exception) {
+        } catch (RuntimeException exception) {
             throw new RuntimeException("JWT Token invalid or expired!");
         }
     }
