@@ -16,11 +16,11 @@ public class PasswordMatchsDataBasePassword implements ChangePasswordVerificatio
     @Override
     public void verification(ChangePasswordArgs args) { // Método que faz a verificação
 
-        String passwordDTO = args.getCpDTO().getPassword(); // Senha para o usuário digitar (que seja igual a do banco)
+        String passwordDTO = args.changePasswordDTO().getPassword(); // Senha para o usuário digitar (que seja igual a do banco)
 
-        String passwordDataBase = args.getUser().getPassword(); // Senha do banco de dados.
+        String passwordDataBase = args.user().getPassword(); // Senha do banco de dados.
 
-        PasswordEncoder encoder = args.getEncoder(); // Verificará se as senhas combinam.
+        PasswordEncoder encoder = args.encoder(); // Verificará se as senhas combinam.
 
 
         if (!encoder.matches(passwordDTO,passwordDataBase)) { // Verifica se as senhas são iguais.

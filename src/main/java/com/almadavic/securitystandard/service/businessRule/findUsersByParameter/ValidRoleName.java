@@ -16,9 +16,9 @@ public class ValidRoleName extends FindUsersByRoleNameVerification {  // Valida�
     @Override
     public Page<User> verification(FindUsersArgs args) {
 
-        String roleName = args.getRoleName(); // role passada pelo usuário.
-        Pageable pageable = args.getPageable(); // Paginação.
-        UserRepository userRepository = args.getUserRepository(); // repository para retornar a página.
+        String roleName = args.roleName(); // role passada pelo usuário.
+        Pageable pageable = args.pageable(); // Paginação.
+        UserRepository userRepository = args.userRepository(); // repository para retornar a página.
 
         String role = "ROLE_" + roleName.toUpperCase();
 

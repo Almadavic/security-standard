@@ -18,8 +18,8 @@ public class NicknameAlreadyRegistered implements RegisterUserVerification { // 
     @Override
     public void verification(RegisterUserArgs args) { // Método que faz a verificação.
 
-        String nickname = args.getRegisterData().getNickname(); // username com que o usuário pretende se cadastrar.
-        UserRepository userRepository = args.getUserRepository(); // Repository para se conectar com o banco.
+        String nickname = args.registerData().getNickname(); // username com que o usuário pretende se cadastrar.
+        UserRepository userRepository = args.userRepository(); // Repository para se conectar com o banco.
 
         Optional<User> user = userRepository.findByNickname(nickname); // Retorna um Optional indicando se já existe algum usuário com aquele nickname no banco.
 

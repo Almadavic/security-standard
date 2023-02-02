@@ -16,9 +16,9 @@ public class NoRoleName extends FindUsersByRoleNameVerification {  // Validaçã
     @Override
     public Page<User> verification(FindUsersArgs args) {
 
-        String roleName = args.getRoleName(); // role supostamente passada pelo usuário.
-        Pageable pageable = args.getPageable(); // Paginação.
-        UserRepository userRepository = args.getUserRepository(); // repository para retornar a página.
+        String roleName = args.roleName(); // role supostamente passada pelo usuário.
+        Pageable pageable = args.pageable(); // Paginação.
+        UserRepository userRepository = args.userRepository(); // repository para retornar a página.
 
         if (roleName == null) { // Se não passar nenhum parametro
             return userRepository.findAll(pageable); // Vai retornar o page normal

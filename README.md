@@ -100,7 +100,7 @@ Bancos de Dados :
 
 # INFORMAÇÕES ADICIONAIS :
 
-    Linhas de Código: 2204
+    Linhas de Código: 2189
     
     Classes / Arquivos implementados: 77
 

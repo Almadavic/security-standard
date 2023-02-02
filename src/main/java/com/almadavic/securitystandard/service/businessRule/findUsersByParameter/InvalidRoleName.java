@@ -15,7 +15,7 @@ public class InvalidRoleName extends FindUsersByRoleNameVerification { // Valida
     @Override
     public Page<User> verification(FindUsersArgs args) { // Se chegar até aqui nessa classe, é porque o parametro está inválido.
 
-        String roleName = args.getRoleName();
+        String roleName = args.roleName();
 
         throw new InvalidParamException("This parameter (role) : { " + roleName + " } is invalid");
 

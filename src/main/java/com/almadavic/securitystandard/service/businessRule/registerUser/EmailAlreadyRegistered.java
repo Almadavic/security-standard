@@ -18,9 +18,9 @@ public class EmailAlreadyRegistered implements RegisterUserVerification { // Se 
     @Override
     public void verification(RegisterUserArgs args) { // Método que faz a verificação.
 
-        String email = args.getRegisterData().getEmail(); // e-mail com que o usuário pretende se cadastrar no sistema.
+        String email = args.registerData().getEmail(); // e-mail com que o usuário pretende se cadastrar no sistema.
 
-        UserRepository userRepository = args.getUserRepository(); // Repository para se conectar com o banco.
+        UserRepository userRepository = args.userRepository(); // Repository para se conectar com o banco.
 
         Optional<User> user = userRepository.findByEmail(email); // Retorna um Optional indicando se já existe algum usuário com aquele e-mail no banco.
 

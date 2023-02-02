@@ -9,8 +9,8 @@ public class SamePasswordException extends RuntimeException { // Quando o usuár
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public SamePasswordException(String msg) {
-        super(msg);
+    public SamePasswordException() {
+        super("Your new password cannot be equal the last one");
     }
 
 }

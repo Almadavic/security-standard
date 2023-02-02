@@ -7,13 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
-@AllArgsConstructor
-@Getter
-public class ChangePasswordArgs { // Argumentos necessários para poder trocar a senha no sistema.
-
-    private ChangePasswordDTO cpDTO; // Senha antiga e nova.
-    private User user; // Usuário logado.
-    private PasswordEncoder encoder; // Codificador de senha.
+public record ChangePasswordArgs(ChangePasswordDTO changePasswordDTO, User user,
+                                 PasswordEncoder encoder) { // Argumentos necessários para poder verificar se o o usuário pode mudar sua senha.
 
 }

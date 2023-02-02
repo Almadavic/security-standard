@@ -14,11 +14,11 @@ public class PasswordMatchRegisterUser implements RegisterUserVerification { // 
     @Override
     public void verification(RegisterUserArgs args) {  // Método que faz a verificação.
 
-        String password = args.getRegisterData().getPassword(); // Password inserida pelo usuário
-        String confirmationPassword = args.getRegisterData().getConfirmationPassword(); // Password de confirmação insirida pelo usuário ( tem que ser identica a de cima)
+        String password = args.registerData().getPassword(); // Password inserida pelo usuário
+        String confirmationPassword = args.registerData().getConfirmationPassword(); // Password de confirmação insirida pelo usuário ( tem que ser identica a de cima)
 
         if (!password.equals(confirmationPassword)) {
-            throw new PasswordDoesntMatchRegisterUserException("The passwords don't match"); // Se for diferente, será lançada uma exception.
+            throw new PasswordDoesntMatchRegisterUserException(); // Se for diferente, será lançada uma exception.
         }
 
     }

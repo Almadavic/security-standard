@@ -9,8 +9,8 @@ public class PasswordDoesntMatchRegisterUserException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public PasswordDoesntMatchRegisterUserException(String msg) {
-        super(msg);
+    public PasswordDoesntMatchRegisterUserException() {
+        super("The passwords don't match");
     }
 
 }
