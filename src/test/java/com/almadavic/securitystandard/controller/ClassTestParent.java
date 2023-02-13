@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @ActiveProfiles(value = "test") // Quando o teste for rodado, ele será rodado em ambiente de teste.
-public class ClassTestParent { // As classes que vão herdar essa classe, vão ter acesso aos atributos e ao método, esse foi o objetivo de criação dessa classe.
+public abstract class ClassTestParent { // As classes que vão herdar essa classe, vão ter acesso aos atributos e ao método, esse foi o objetivo de criação dessa classe.
 
     protected final int forbidden = 403; // Indica que a pessoa está logada mas não tem acesso para acessar tal recurso.
     protected final int unauthorized = 401;  // Indica que a pessoa não está logada, portanto não pode acessar o recurso.

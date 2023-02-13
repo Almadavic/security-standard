@@ -9,7 +9,6 @@ import com.almadavic.securitystandard.service.businessRule.changePassword.Change
 import com.almadavic.securitystandard.service.businessRule.changePassword.ChangePasswordVerification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
