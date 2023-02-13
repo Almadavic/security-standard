@@ -1,7 +1,7 @@
 package com.almadavic.securitystandard.controller;
 
 
-import com.almadavic.securitystandard.dto.request.ChangePasswordDTO;
+import com.almadavic.securitystandard.dto.request.ChangePassword;
 import com.almadavic.securitystandard.dto.response.UserDTO;
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.service.serviceAction.UserAreaService;
@@ -34,7 +34,7 @@ public class UserAreaControllerImpl implements UserAreaController { // Controlle
 
     @Override
     @PutMapping(value = "/changepassword") // Método HTTP PUT - > ALTERAR / UPDATE
-    public ResponseEntity<String> changePassword(ChangePasswordDTO cpDTO, User userLogged) { // Método para alterar a senha da conta no sistema.
+    public ResponseEntity<String> changePassword(ChangePassword cpDTO, User userLogged) { // Método para alterar a senha da conta no sistema.
 
         String message = userAreaService.changePassword(cpDTO, userLogged);
 

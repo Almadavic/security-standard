@@ -2,7 +2,7 @@ package com.almadavic.securitystandard.controller;
 
 
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.commonStandardError.StandardError;
-import com.almadavic.securitystandard.dto.request.ChangePasswordDTO;
+import com.almadavic.securitystandard.dto.request.ChangePassword;
 import com.almadavic.securitystandard.dto.response.UserDTO;
 import com.almadavic.securitystandard.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +44,7 @@ public interface UserAreaController { // Controller de UserArea deve implementar
             @ApiResponse(responseCode = "500", description = "The new password cannot be equal the last one",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))}),
     })
-    ResponseEntity<String> changePassword(@RequestBody @Valid ChangePasswordDTO cpDTO, @AuthenticationPrincipal
+    ResponseEntity<String> changePassword(@RequestBody @Valid ChangePassword cpDTO, @AuthenticationPrincipal
     @Parameter(hidden = true) User userLogged); // Método para alterar a senha do usuário no sistema.
 
 }

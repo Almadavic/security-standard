@@ -9,8 +9,8 @@ public class EmailAlreadyRegisteredException extends RuntimeException { // Erro 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public EmailAlreadyRegisteredException(String msg) {
-        super(msg);
+    public EmailAlreadyRegisteredException(String email) {
+        super("This e-mail: " + email + " already exists in the system");
     }
 
 }

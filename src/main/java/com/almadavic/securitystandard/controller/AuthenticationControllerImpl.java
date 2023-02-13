@@ -2,7 +2,7 @@ package com.almadavic.securitystandard.controller;
 
 
 import com.almadavic.securitystandard.config.securityConfig.Token;
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.Login;
 import com.almadavic.securitystandard.service.serviceAction.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -23,7 +23,7 @@ public class AuthenticationControllerImpl implements AuthenticationController { 
 
     @Override
     @PostMapping // Método HTTP POST
-    public ResponseEntity<Token> authenticate(LoginDTO loginData) { // Método para se autenticar no client.
+    public ResponseEntity<Token> authenticate(Login loginData) { // Método para se autenticar no client.
 
         Token token = authService.authenticate(loginData); //  Token que será retornado para o Client.
 

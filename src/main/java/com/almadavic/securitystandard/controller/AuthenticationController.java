@@ -3,7 +3,7 @@ package com.almadavic.securitystandard.controller;
 
 import com.almadavic.securitystandard.config.exceptionConfig.standardError.commonStandardError.StandardError;
 import com.almadavic.securitystandard.config.securityConfig.Token;
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.Login;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,6 +26,6 @@ public interface AuthenticationController { // Controller de autenticação deve
             @ApiResponse(responseCode = "400", description = "E-mail and / or password are / is wrong",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = StandardError.class))})
     })
-    ResponseEntity<Token> authenticate(@RequestBody @Valid LoginDTO loginData); // Método para se autenticar no sistema
+    ResponseEntity<Token> authenticate(@RequestBody @Valid Login loginData); // Método para se autenticar no sistema
 
 }

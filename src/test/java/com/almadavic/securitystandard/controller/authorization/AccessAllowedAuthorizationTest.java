@@ -2,7 +2,7 @@ package com.almadavic.securitystandard.controller.authorization;
 
 
 import com.almadavic.securitystandard.controller.ClassTestParent;
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.Login;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,7 +47,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
         // Método tem administrador logado.
         // Qualquer um pode (logado) pode acessar esse método.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -66,7 +66,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
         // Método tem usuário logado.
         // Qualquer um pode (logado) pode acessar esse método.
 
-        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
+        Login loginData = new Login("user1@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -83,7 +83,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
         // Método tem administrador logado.
         // Qualquer um pode (logado) pode acessar esse método.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -101,7 +101,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
         // Método tem usuário logado.
         // Qualquer um pode (logado) pode acessar esse método.
 
-        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
+        Login loginData = new Login("user1@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -131,7 +131,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
         // Método tem administrador logado.
         // Apenas administradores podem acessar esse recurso.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -148,7 +148,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
         // Método tem administrador logado.
         // Apenas administradores podem acessar esse recurso.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -163,7 +163,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
     void accessAnyOtherResourcedRoleAdminLogged() throws Exception { // Método testa o acesso a algum recurso inválido no sistema, usuário role=administrador logado. Deve retornar status not found.
 
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -178,7 +178,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
     void accessAnyOtherResourceRoleUserLogged() throws Exception { // Método testa o acesso a algum recurso inválido no sistema, usuário role=user logado. Deve retornar status not faund
 
 
-        LoginDTO loginData = new LoginDTO("user1@hotmail.com", "123456");
+        Login loginData = new Login("user1@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 

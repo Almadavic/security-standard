@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor //Usado na parte de TESTES -> Para instanciar um DTO!
 @Getter
 @JsonPropertyOrder(value = {"yourPassword", "newPassword"})
-public class ChangePasswordDTO { // DTO que representa a mudança de senha do usuário.
+public class ChangePassword { // DTO que representa a mudança de senha do usuário.
 
     @NotBlank // --> Campo obrigatorio!
     @JsonProperty(value = "yourPassword")

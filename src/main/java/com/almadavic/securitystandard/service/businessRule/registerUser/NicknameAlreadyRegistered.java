@@ -24,7 +24,7 @@ public class NicknameAlreadyRegistered implements RegisterUserVerification { // 
         Optional<User> user = userRepository.findByNickname(nickname); // Retorna um Optional indicando se já existe algum usuário com aquele nickname no banco.
 
         if (user.isPresent()) {
-            throw new NicknameAlreadyRegisteredException("This nickname: " + nickname + " already exists in the system"); // Se tiver, vai dar erro, pois não pode ter 2 nicknames iguais.
+            throw new NicknameAlreadyRegisteredException(nickname); // Se tiver, vai dar erro, pois não pode ter 2 nicknames iguais.
         }
 
     }

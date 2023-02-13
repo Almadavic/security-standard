@@ -9,8 +9,8 @@ public class NicknameAlreadyRegisteredException extends RuntimeException { // Er
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public NicknameAlreadyRegisteredException(String msg) {
-        super(msg);
+    public NicknameAlreadyRegisteredException(String nickname) {
+        super("This nickname: " + nickname + " already exists in the system");
     }
 
 }

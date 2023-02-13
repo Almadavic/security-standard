@@ -10,8 +10,8 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 
-@Getter
 @JsonPropertyOrder(value = {"nickname", "email", "registrationMoment"})
+@Getter
 // Estou garantindo a ordem dos atributos no JSON.
 public class UserDTO { // DTO que será retornado pro client, representa o usuário (perfil na visão do usuario).
 

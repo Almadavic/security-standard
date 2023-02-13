@@ -2,7 +2,7 @@ package com.almadavic.securitystandard.controller.userController;
 
 
 import com.almadavic.securitystandard.controller.ClassTestParent;
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.Login;
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.repository.UserRepository;
 import com.almadavic.securitystandard.service.customException.InvalidParamException;
@@ -32,7 +32,7 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersInvalidParameter() throws Exception { // Método deve falhar, pois foi passado um nome de uma role inválida.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
+        Login loginData = new Login("admin@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
 
         String token = authenticate(loginData); // Loga o usuário no sistema através do DTO e retorna o token pora ser enviado nas próxima requisição.
 
@@ -50,7 +50,7 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersParameterUser() throws Exception { // Método deve retornar uma página de usuários do sistema que tem a role USER
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -65,7 +65,7 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersParameterAdministrator() throws Exception { // Método deve retornar uma página de usuários do sistema que tem a role ADMINISTRATOR
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -80,7 +80,7 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUsersNoParameter() throws Exception { // Método deve retornar uma página de usuários do sistema sem passar parametro na URI.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -93,7 +93,7 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUserByIdNotFound() throws Exception { // Método deve falhar, pois passei um id cujo não existe nenhum usuário no banco cadastrado com o mesmo.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
@@ -111,7 +111,7 @@ public class FindUsersTest extends ClassTestParent { // Classe testa a busca de 
     @Test
     void findUserByIdSuccess() throws Exception { // Método retorna um usuario especifico do banco.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 

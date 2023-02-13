@@ -2,7 +2,7 @@ package com.almadavic.securitystandard.controller.authentication;
 
 
 import com.almadavic.securitystandard.controller.ClassTestParent;
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.Login;
 import com.almadavic.securitystandard.service.customException.DatabaseException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,7 +25,7 @@ public class AuthenticationTest extends ClassTestParent {  // Classe testa a aut
     @Test
     void loginFailPasswordWrong() throws Exception { // Login deve falhar pois a senha está incorreta.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "1234567");
+        Login loginData = new Login("admin@hotmail.com", "1234567");
 
         mockMvc.perform(post(path)
                         .contentType("application/json")
@@ -40,7 +40,7 @@ public class AuthenticationTest extends ClassTestParent {  // Classe testa a aut
     @Test
     void loginFailEmailWrong() throws Exception { // Login deve falhar pois o e-mail está incorreto.
 
-        LoginDTO loginData = new LoginDTO("adminn@hotmail.com", "123456");
+        Login loginData = new Login("adminn@hotmail.com", "123456");
 
         mockMvc.perform(post(path)
                         .contentType("application/json")
@@ -55,7 +55,7 @@ public class AuthenticationTest extends ClassTestParent {  // Classe testa a aut
     @Test
     void loginOk() throws Exception { // Login deve ser feito com sucesso.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         mockMvc.perform(post(path)
                         .contentType("application/json")

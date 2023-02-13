@@ -2,8 +2,8 @@ package com.almadavic.securitystandard.controller.userAreaController;
 
 
 import com.almadavic.securitystandard.controller.ClassTestParent;
-import com.almadavic.securitystandard.dto.request.ChangePasswordDTO;
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.ChangePassword;
+import com.almadavic.securitystandard.dto.request.Login;
 import com.almadavic.securitystandard.service.customException.DatabaseException;
 import com.almadavic.securitystandard.service.customException.SamePasswordException;
 import org.junit.jupiter.api.Test;
@@ -28,11 +28,11 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
     @Test
     void passwordDoenstMatchDataBasePassword() throws Exception { // Alteração de senha deve falhar pois o usuário está passando sua senha incorreta.
 
-        LoginDTO loginData = new LoginDTO("user2@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
+        Login loginData = new Login("user2@hotmail.com", "123456"); // DTO de Login que passamos na requisição para logar.
 
         String token = authenticate(loginData); // Loga o usuário no sistema através do DTO e retorna o token pora ser enviado nas próxima requisição.
 
-        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO("12345678", "13553353553"); // DTO para alterar a senha
+        ChangePassword changePasswordDTO = new ChangePassword("12345678", "13553353553"); // DTO para alterar a senha
 
         mockMvc.perform(put(path) // Caminho da requisição
                         .contentType("application/json") // O tipo do conteúdo
@@ -48,11 +48,11 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
     @Test
     void passwordIsEqualTheLastOne() throws Exception { // Alteração da senha deve falhar pois o usuário está passando o valor da nova senha igual da antiga.
 
-        LoginDTO loginData = new LoginDTO("admin@hotmail.com", "123456");
+        Login loginData = new Login("admin@hotmail.com", "123456");
 
         String token = authenticate(loginData);
 
-        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO("123456", "123456");
+        ChangePassword changePasswordDTO = new ChangePassword("123456", "123456");
 
         mockMvc.perform(put(path)
                         .contentType("application/json")
@@ -68,7 +68,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
     @Test
     void changePasswordSuccessFlow() throws Exception { // Alteração de senha deve ser feita com sucesso.
 
-        LoginDTO firstLogin = new LoginDTO("user1@hotmail.com", "123456");
+        Login firstLogin = new Login("user1@hotmail.com", "123456");
 
         String token = authenticate(firstLogin);
 
@@ -76,21 +76,21 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
 
         String newPassword = "1234567";
 
-        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO(oldPassword, newPassword);
+        ChangePassword changePasswordDTO = new ChangePassword(oldPassword, newPassword);
 
         passwordChanged(changePasswordDTO, token); // Senha alterada de oldPassword para newPassword;
 
-        LoginDTO loginDataAttempt1 = new LoginDTO("user1@hotmail.com", oldPassword);
+        Login loginDataAttempt1 = new Login("user1@hotmail.com", oldPassword);
 
         enterSystemFail(loginDataAttempt1); // Usuário tenta logar com a senha incorreta ( Senha antiga)
 
-        LoginDTO loginDataAttempt2 = new LoginDTO("user1@hotmail.com", newPassword);
+        Login loginDataAttempt2 = new Login("user1@hotmail.com", newPassword);
 
         enterSystemSuccess(loginDataAttempt2); // Usuário tenta logar com a senha correta ( Nova senha)
 
     }
 
-    private void passwordChanged(ChangePasswordDTO changePasswordDTO, String token) throws Exception { // Mudança de senha.
+    private void passwordChanged(ChangePassword changePasswordDTO, String token) throws Exception { // Mudança de senha.
 
         mockMvc.perform(put(path)
                         .contentType("application/json")
@@ -101,7 +101,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
                         result.getResponse().getContentAsString()));
     }
 
-    private void enterSystemFail(LoginDTO loginDataAttempt1) throws Exception { // Usuário tenta logar com a senha antiga.
+    private void enterSystemFail(Login loginDataAttempt1) throws Exception { // Usuário tenta logar com a senha antiga.
 
         mockMvc.perform(post("/auth")
                         .contentType("application/json")
@@ -112,7 +112,7 @@ public class ChangePasswordTest extends ClassTestParent {  // Classe testa a fun
                         , result.getResolvedException().getMessage()));
     }
 
-    private void enterSystemSuccess(LoginDTO loginDataAttempt2) throws Exception { // Usuário tenta logar com a nova senha.
+    private void enterSystemSuccess(Login loginDataAttempt2) throws Exception { // Usuário tenta logar com a nova senha.
 
         mockMvc.perform(post("/auth")
                         .contentType("application/json")

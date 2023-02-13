@@ -1,7 +1,7 @@
 package com.almadavic.securitystandard.controller;
 
 
-import com.almadavic.securitystandard.dto.request.LoginDTO;
+import com.almadavic.securitystandard.dto.request.Login;
 import com.almadavic.securitystandard.service.serviceAction.TokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class ClassTestParent { // As classes que vão herdar essa classe, vão t
     @Autowired
     private TokenService tokenService; // Injeção de dependência para gerar o token para ser utilizado em uma próxima requisição.
 
-    protected String authenticate(LoginDTO loginData) { // Autentica o usuário
+    protected String authenticate(Login loginData) { // Autentica o usuário
 
         UsernamePasswordAuthenticationToken login = loginData.toConvert();   // converter os dados passado pelo usuario em um token de autenticação.
 
