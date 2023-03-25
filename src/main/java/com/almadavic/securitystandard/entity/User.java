@@ -54,11 +54,10 @@ public class User implements UserDetails {    // Classe  do banco -> User | Repr
     private final List<Role> roles = new ArrayList<>();     // Muitos usuários tem muitas permissões, o final foi usado pois não é interessante alterar a lista, e sim adicionar e remover os atributos.
 
     @Builder // Indica um Builder para construir um user baseado nos parametros abaixo.
-    public User(String nickname, String email, String password, Role role) {
+    public User(@NonNull String nickname, @NonNull String email, @NonNull String password) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
-        addRole(role);
     }
 
     public void addRole(Role role) { // Método adiciona a role em um usuário.

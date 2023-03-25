@@ -1,7 +1,6 @@
 package com.almadavic.securitystandard.dto.response;
 
 
-import com.almadavic.securitystandard.entity.Role;
 import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.util.UserMapper;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @JsonPropertyOrder(value = {"id", "nickname", "email", "roles", "registrationMoment"})

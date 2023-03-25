@@ -12,6 +12,7 @@ import com.almadavic.securitystandard.service.businessRule.findUsersByParameter.
 import com.almadavic.securitystandard.service.businessRule.registerUser.RegisterUserArgs;
 import com.almadavic.securitystandard.service.businessRule.registerUser.RegisterUserVerification;
 import com.almadavic.securitystandard.service.customException.ResourceNotFoundException;
+import com.almadavic.securitystandard.util.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -51,35 +52,26 @@ public class UserServiceImpl extends ServiceParent implements UserService { // S
 
         registerUserVerifications.forEach(v -> v.verification(new RegisterUserArgs(registerData, userRepository))); // verificações se os dados informados estão válidos para o cadastro.
 
-        User user = userMapper.toUserEntity(registerData, encoder, returnRole(RoleName.ROLE_USER));
+        User user = UserMapper.toUserEntity(registerData, encoder);
+        user.addRole(returnRole(RoleName.ROLE_USER));
 
-        user = userRepository.save(user); // salva o usuário no banco.
-
-        return userMapper.toUserMonitoringDTO(user); // retorna o DTO desse usuário salvo para o client.
+        return UserMapper.toUserMonitoringDTO(userRepository.save(user));  // retorna o DTO desse usuário salvo para o client.
     }
 
     @Override
     @Cacheable(value = "usersList")
     public Page<UserMonitoringDTO> findAll(Pageable pageable, String roleName) { // Método que retorna uma página de usuários cadastrados no sistema.
-
-        Page<User> users = verifyParametersToReturnCorrectPage(pageable, roleName);
-
-        return userMapper.toUserMonitoringDTO(users); // Método retorna uma página de UsersDTO (mais informações na declaração do método) e a lista é retornada pro controller.
+        return UserMapper.toUserMonitoringDTO(verifyParametersToReturnCorrectPage(pageable, roleName)); // Método retorna uma página de UsersDTO (mais informações na declaração do método) e a lista é retornada pro controller.
     }
 
     @Override
     public UserMonitoringDTO findById(String id) { // Método retorna um usuário do banco de dados pelo ID
-
-        User user = returnUser(id); // retorna um user do banco
-
-        return userMapper.toUserMonitoringDTO(user); // retorna o DTO desse user para o controller.
+        return UserMapper.toUserMonitoringDTO(returnUser(id)); // retorna o DTO desse user para o controller.
     }
 
     private Role returnRole(RoleName name) {  // Método retorna uma role do banco de dados passando o nome dessa role como parametro
-
         return roleRepository.findByName(name).orElseThrow(() ->
                 new ResourceNotFoundException("The role : " + name + " wasn't found in database")); // Método retorna essa role, caso a role não exista, lança exception.
-
     }
 
     private Page<User> verifyParametersToReturnCorrectPage(Pageable pageable, String roleName) { // Método usa o design patterns : Chain of Responsibility
@@ -93,10 +85,8 @@ public class UserServiceImpl extends ServiceParent implements UserService { // S
     }
 
     private User returnUser(String id) { // Método retorna um usuário do banco de dados pelo id.
-
         return userRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("The user id: " + id + " wasn't found on database")); // Se esse usuário não existir, vai ser lançada uma exception.
-
     }
 
 }

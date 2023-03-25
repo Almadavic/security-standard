@@ -36,9 +36,7 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
 
     public String generateToken(Authentication authentication) { // Método que gera um token.
 
-        User logged = (User) authentication.getPrincipal();  // Recupera o usuário logado
-
-        UserMonitoringDTO userDTO = userMapper.toUserMonitoringDTO(logged); // Cria um DTO baseado no usuário logado.
+        UserMonitoringDTO userDTO = userMapper.toUserMonitoringDTO((User) authentication.getPrincipal()); // Cria um DTO baseado no usuário logado.
 
         List<String> roles = convertFromObjectListToStringList(userDTO.getRolesDTO()); // Converte uma lista de RoleDTO para string
 
@@ -73,10 +71,7 @@ public class TokenServiceImpl implements TokenService { // Serviço relacionado 
     }
 
     private Instant expirationInstant() { // Método que retorna o tempo (QUANDO) o token vai expirar.
-
-        long hours = Long.parseLong(this.expiration);
-
-        return LocalDateTime.now().plusHours(hours)
+        return LocalDateTime.now().plusHours(Long.parseLong(this.expiration))
                 .toInstant(ZoneOffset.of("-03:00"));
 
     }

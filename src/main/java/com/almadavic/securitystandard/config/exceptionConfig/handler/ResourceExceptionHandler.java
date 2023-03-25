@@ -16,6 +16,7 @@ import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -58,6 +59,12 @@ public class ResourceExceptionHandler {
     // Quando há a tentativa de acessar algum recurso inválido quando o usuário está logado.
     public ResponseEntity<StandardError> mappingNotFound(HttpServletRequest request) {
         return handlingException(new ResourceNotFoundException("The resource isn't mapped"),request,"Not found", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    // Quando há a tentativa de acessar algum recurso com o verbo http errado.
+    public ResponseEntity<StandardError> methodNotSupportedException(HttpRequestMethodNotSupportedException exception, HttpServletRequest request) {
+        return handlingException(exception,request,"Method not allowed", HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(value = PropertyReferenceException.class)

@@ -14,6 +14,7 @@ import java.util.UUID;
 @Table(name = "tb_roles")    // nome da tabela do banco de dados, será uma tabela de roles.
 @NoArgsConstructor // No caso, não está sendo usado pelo programador mas sim pelo JPA debaixo dos panos.
 @Builder  // Cria um builder baseado no  construtor da linha de baixo.
+@NonNull
 @AllArgsConstructor // No caso, só haveria 1 atributo no construtor, o name, pois não tem o final antes do atributo.
 @Getter   // Cria os getters dos atributos
 @Setter     // Cria os setters dos atributos

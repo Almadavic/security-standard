@@ -7,6 +7,7 @@ import com.almadavic.securitystandard.entity.User;
 import com.almadavic.securitystandard.repository.UserRepository;
 import com.almadavic.securitystandard.service.businessRule.changePassword.ChangePasswordArgs;
 import com.almadavic.securitystandard.service.businessRule.changePassword.ChangePasswordVerification;
+import com.almadavic.securitystandard.util.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class UserAreaServiceImpl extends ServiceParent implements UserAreaServic
 
     @Override
     public UserDTO myProfile(User userLogged) { // Método recebe o usuário logado.
-        return userMapper.toUserDTO(userLogged); // retorna o DTO desse usuário para o client.
+        return UserMapper.toUserDTO(userLogged); // retorna o DTO desse usuário para o client.
     }
 
     @Override
@@ -43,11 +44,7 @@ public class UserAreaServiceImpl extends ServiceParent implements UserAreaServic
     }
 
     private void updatePassword(ChangePassword cpDTO, User userLogged) { // Método obtem a senha (nova) passada pelo usuário e altera a senha da conta com essa nova senha passada.
-
-        String newPassword = encoder.encode(cpDTO.getNewPassword()); // Codifica a senha.
-
-        userLogged.setPassword(newPassword); // Seta a senha codificada no usuário.
-
+        userLogged.setPassword(encoder.encode(cpDTO.getNewPassword())); // Seta a senha codificada no usuário.
     }
 
 }

@@ -43,19 +43,13 @@ public class UserControllerImpl implements UserController { // Controller para o
     @Override
     @GetMapping // Método HTTP GET -> Obter / Recuperar
     public ResponseEntity<Page<UserMonitoringDTO>> findAll(Pageable pageable, String roleName) { // Método que retorna uma page de users do sistema.
-
-        Page<UserMonitoringDTO> usersDTO = userService.findAll(pageable, roleName);
-
-        return ResponseEntity.ok().body(usersDTO);
+        return ResponseEntity.ok().body(userService.findAll(pageable, roleName));
     }
 
     @Override
-    @GetMapping(value = "/{id}") // Método HTTP GET -> Obter / Recuperar
-    public ResponseEntity<UserMonitoringDTO> findById(String id) { // Método que retorna um usuário especifico do sistema pelo ID.
-
-        UserMonitoringDTO userDTO = userService.findById(id);
-
-        return ResponseEntity.ok().body(userDTO);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserMonitoringDTO> findById(String id) { // Método HTTP GET -> Obter / Recuperar
+        return ResponseEntity.ok().body(userService.findById(id)); // Método que retorna um usuário especifico do sistema pelo ID.
     }
 
 }

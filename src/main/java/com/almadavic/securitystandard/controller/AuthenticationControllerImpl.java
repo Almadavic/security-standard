@@ -24,10 +24,7 @@ public class AuthenticationControllerImpl implements AuthenticationController { 
     @Override
     @PostMapping // Método HTTP POST
     public ResponseEntity<Token> authenticate(Login loginData) { // Método para se autenticar no client.
-
-        Token token = authService.authenticate(loginData); //  Token que será retornado para o Client.
-
-        return ResponseEntity.ok().body(token);
+        return ResponseEntity.ok().body(authService.authenticate(loginData));  //  Token que será retornado para o Client.
     }
 
 }

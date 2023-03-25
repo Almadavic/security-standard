@@ -28,7 +28,7 @@ public class AccessAllowedAuthorizationTest extends ClassTestParent { // Classe 
                 .andExpect(result -> assertEquals(ok, result.getResponse().getStatus())); // Tem que retornar esse status,  é o único status que deve ser retornado desse recurso.
 
     }
-
+    
     @Test
     void accessAuthentication() throws Exception { // Método testa o acesso ao recurso /auth. O sistema deve deixar.
 

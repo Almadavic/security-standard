@@ -25,20 +25,14 @@ public class UserAreaControllerImpl implements UserAreaController { // Controlle
 
     @Override
     @GetMapping(value = "/myprofile") // Método HTTP GET -> Obter / Recuperar
-    public ResponseEntity<UserDTO> myProfile(User userLogged) { // Método para visualizar "area do usuário" no sistema, ver dados do usuário logado.
-
-        UserDTO userDTO = userAreaService.myProfile(userLogged);
-
-        return ResponseEntity.ok().body(userDTO);
+    public ResponseEntity<UserDTO> myProfile(User userLogged) {  ///Método para visualizar "area do usuário" no sistema, ver dados do usuário logado.
+        return ResponseEntity.ok().body(userAreaService.myProfile(userLogged));
     }
 
     @Override
     @PutMapping(value = "/changepassword") // Método HTTP PUT - > ALTERAR / UPDATE
-    public ResponseEntity<String> changePassword(ChangePassword cpDTO, User userLogged) { // Método para alterar a senha da conta no sistema.
-
-        String message = userAreaService.changePassword(cpDTO, userLogged);
-
-        return ResponseEntity.ok().body(message);
+    public ResponseEntity<String> changePassword(ChangePassword cpDTO, User userLogged) {  // Método para alterar a senha da conta no sistema.
+        return ResponseEntity.ok().body(userAreaService.changePassword(cpDTO, userLogged));
     }
 
 }
