@@ -94,6 +94,10 @@ Bancos de Dados :
     H2 - Usado em ambiente de teste.
 
 
+- Swagger :
+
+<img src="https://user-images.githubusercontent.com/85299065/228671863-ea7b96f2-442e-44a8-a121-363e8eef5514.png" width="100%" height="100%">
+
 - Schema :
 
 <img src="https://user-images.githubusercontent.com/85299065/212201048-78f9aa0b-e700-4406-8a68-84b74f1b96fa.PNG" width="100%" height="100%">
